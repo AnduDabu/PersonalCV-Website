@@ -188,7 +188,16 @@ const BasketballProject = () => {
                     {/* Official Demo */}
                     <div className="mb-24">
                         <div className="bg-surface rounded-2xl overflow-hidden border border-white/5 shadow-2xl hover:border-primary hover:shadow-primary/30 transition-all duration-300">
-                            <VideoPlayer src="/Basketball%20Media/Video%20Simulari/VideoDemo.mp4" aspectRatio="aspect-video" />
+                            <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                                <iframe
+                                    className="absolute top-0 left-0 w-full h-full"
+                                    src="https://www.youtube.com/embed/1sgGy72bJwo"
+                                    title="Basketball Social App - Full Demo"
+                                    frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowFullScreen
+                                ></iframe>
+                            </div>
                         </div>
                         <p className="text-center text-gray-600 dark:text-gray-500 mt-4 text-sm font-medium tracking-wide uppercase">Official Project Demo</p>
                     </div>
