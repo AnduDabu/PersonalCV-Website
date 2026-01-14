@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-background: 255 255 255;
+    /* White */
+    --color-text: 31 41 55;
+    /* Gray-800 - Darker for better readability */
+    --color-surface: 243 244 246;
+    /* Gray-100 */
+    --color-primary: 20 184 166;
+    /* Teal-500 */
+    --color-secondary: 15 118 110;
+    /* Teal-700 */
+    --color-grid: #e5e7eb;
+    /* Gray-200 for Light Mode Grid */
+  }
+
+  html.dark {
+    --color-background: 18 18 18;
+    /* Deep Charcoal */
+    --color-text: 243 244 246;
+    /* Gray-100 */
+    --color-surface: 30 30 30;
+    /* Lighter Charcoal */
+    --color-primary: 20 184 166;
+    /* Teal-500 */
+    --color-secondary: 15 118 110;
+    /* Teal-700 */
+    --color-grid: #374151;
+    /* Gray-700 for Dark Mode Grid */
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-background text-text transition-colors duration-300;
+}
+
+/* Custom scrollbar for Webkit */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--color-background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--color-surface));
+  border-radius: 4px;
+  border: 1px solid rgb(var(--color-background));
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--color-primary));
+}
