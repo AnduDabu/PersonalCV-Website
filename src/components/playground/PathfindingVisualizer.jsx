@@ -6,7 +6,9 @@ const COLS = 40;
 
 const PathfindingVisualizer = () => {
     const [grid, setGrid] = useState([]);
-    const [mouseIsPressed, setMouseIsPressed] = useState(false);
+    // Remove state-based mouse tracking for logic to avoid staleness in memoized nodes
+    // We can keep state if we needed to render something based on it, but for logic useRef is better.
+    const mouseIsPressed = useRef(false);
     const [isRunning, setIsRunning] = useState(false);
     const [algorithm, setAlgorithm] = useState('dijkstra'); // 'dijkstra' or 'astar'
     const [key, setKey] = useState(0);
@@ -55,17 +57,17 @@ const PathfindingVisualizer = () => {
         if (isRunning) return;
         const newGrid = getNewGridWithWallToggled(grid, row, col);
         setGrid(newGrid);
-        setMouseIsPressed(true);
+        mouseIsPressed.current = true;
     };
 
     const handleMouseEnter = (row, col) => {
-        if (!mouseIsPressed || isRunning) return;
+        if (!mouseIsPressed.current || isRunning) return;
         const newGrid = getNewGridWithWallToggled(grid, row, col);
         setGrid(newGrid);
     };
 
     const handleMouseUp = () => {
-        setMouseIsPressed(false);
+        mouseIsPressed.current = false;
     };
 
     const getNewGridWithWallToggled = (grid, row, col) => {
@@ -415,27 +417,18 @@ const PathfindingVisualizer = () => {
                     >
                         {grid.map((row, rowIdx) => {
                             return row.map((node, nodeIdx) => {
-                                const { row, col, isFinish, isStart, isWall, isPath, isVisited } = node;
                                 return (
-                                    <div
-                                        key={`node-${row}-${col}`}
-                                        id={`node-${row}-${col}`}
-                                        className={`w-4 h-4 md:w-6 md:h-6 border border-gray-100 dark:border-white/5 rounded-[2px] transition-colors duration-300 
-                                            ${isFinish ? 'bg-red-500 scale-110 shadow-lg shadow-red-500/50 z-10' :
-                                                isStart ? 'bg-green-500 scale-110 shadow-lg shadow-green-500/50 z-10' :
-                                                    isWall ? 'bg-gray-600 dark:bg-gray-700 animate-pop' :
-                                                        isPath ? 'bg-yellow-400 animate-path' :
-                                                            isVisited ? 'bg-primary/50 animate-visited' :
-                                                                'bg-white dark:bg-background hover:bg-gray-100 dark:hover:bg-white/5'}`}
-                                        onMouseDown={() => handleMouseDown(row, col)}
-                                        onMouseEnter={() => handleMouseEnter(row, col)}
-                                        onMouseUp={() => handleMouseUp()}
-                                        onTouchStart={(e) => {
-                                            if (e.cancelable) e.preventDefault();
-                                            handleMouseDown(row, col);
-                                            lastTouchedNode.current = { row, col };
-                                        }}
-                                    ></div>
+                                    <Node
+                                        key={`node-${node.row}-${node.col}`}
+                                        {...node}
+                                        onMouseDown={handleMouseDown}
+                                        onMouseEnter={handleMouseEnter}
+                                        onMouseUp={handleMouseUp}
+                                        lastTouchedNode={lastTouchedNode}
+                                        setGrid={setGrid}
+                                        grid={grid}
+                                        getNewGridWithWallToggled={getNewGridWithWallToggled}
+                                    />
                                 );
                             });
                         })}
@@ -480,5 +473,45 @@ const PathfindingVisualizer = () => {
         </div>
     );
 };
+
+// Extracted and Memoized Node Component
+const Node = React.memo(({ row, col, isFinish, isStart, isWall, isPath, isVisited, onMouseDown, onMouseEnter, onMouseUp, lastTouchedNode, setGrid, grid, getNewGridWithWallToggled }) => {
+    // Custom touch handler for individual node optimization if needed, 
+    // but the parent handles main touch logic.
+    // We keep onTouchStart for immediate feedback on tap.
+
+    return (
+        <div
+            id={`node-${row}-${col}`}
+            className={`w-4 h-4 md:w-6 md:h-6 border border-gray-100 dark:border-white/5 rounded-[2px] transition-colors duration-200 
+                ${isFinish ? 'bg-red-500 scale-110 shadow-lg shadow-red-500/50 z-10' :
+                    isStart ? 'bg-green-500 scale-110 shadow-lg shadow-green-500/50 z-10' :
+                        isWall ? 'bg-gray-600 dark:bg-gray-700 animate-pop' :
+                            isPath ? 'bg-yellow-400 animate-path' :
+                                isVisited ? 'bg-primary/50 animate-visited' :
+                                    'bg-white dark:bg-background hover:bg-gray-100 dark:hover:bg-white/5'}`}
+            onMouseDown={() => onMouseDown(row, col)}
+            onMouseEnter={() => onMouseEnter(row, col)}
+            onMouseUp={() => onMouseUp()}
+            onTouchStart={(e) => {
+                if (e.cancelable) e.preventDefault();
+                onMouseDown(row, col);
+                if (lastTouchedNode && lastTouchedNode.current) {
+                    lastTouchedNode.current = { row, col };
+                }
+            }}
+        ></div>
+    );
+}, (prevProps, nextProps) => {
+    // Custom comparison function for performance
+    // Only re-render if the state of the node actually changed
+    return (
+        prevProps.isWall === nextProps.isWall &&
+        prevProps.isVisited === nextProps.isVisited &&
+        prevProps.isPath === nextProps.isPath &&
+        prevProps.isStart === nextProps.isStart &&
+        prevProps.isFinish === nextProps.isFinish
+    );
+});
 
 export default PathfindingVisualizer;
