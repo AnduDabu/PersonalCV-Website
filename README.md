@@ -37,8 +37,8 @@ A dedicated section for technical demonstrations and experiments:
 
 1.  **Clone the repository**
     ```bash
-    git clone https://github.com/yourusername/portfolio.git
-    cd portfolio
+    git clone https://github.com/AnduDabu/PersonalCV-Website.git
+    cd PersonalCV-Website
     ```
 
 2.  **Install dependencies**
