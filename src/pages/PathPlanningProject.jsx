@@ -92,7 +92,7 @@ const PathPlanningProject = () => {
                                     Simulation demonstrating the PRM algorithm generating nodes (blue dots), connecting valid paths (black lines), and finding the optimal route (red line) from start (green) to goal (red X).
                                 </p>
                                 <div className="rounded-xl overflow-hidden border border-white/10 shadow-2xl">
-                                    <VideoPlayer src="/path-planning/pathplanning.mp4#t=0.1" />
+                                    <VideoPlayer src="https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/path-planning/pathplanning.mp4#t=0.1" />
                                 </div>
                             </div>
                         </div>
