@@ -355,6 +355,10 @@ const PathfindingVisualizer = () => {
                 <MousePointer2 className="w-6 h-6 text-primary" /> Pathfinding Algorithm
             </h2>
 
+            <p className="text-gray-600 dark:text-gray-400 mb-6">
+                Compare two fundamental pathfinding algorithms: <span className="font-bold text-gray-900 dark:text-white">Dijkstra</span> (guarantees shortest path, explores evenly) and <span className="font-bold text-gray-900 dark:text-white">A*</span> (uses heuristics to find the destination faster). Switch between them to see the difference in how they search!
+            </p>
+
             <div className="flex flex-wrap gap-4 mb-6">
                 <button
                     onClick={runPathfinding}
