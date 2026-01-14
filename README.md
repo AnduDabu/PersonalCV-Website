@@ -57,6 +57,27 @@ A dedicated section for technical demonstrations and experiments:
     npm run build
     ```
 
+## 🌐 Deployment
+
+**Live Site**: [alexandrudabu.com](https://www.alexandrudabu.com)
+
+### Infrastructure
+- **Hosting**: [Cloudflare Pages](https://pages.cloudflare.com/) (free tier)
+- **Domain**: alexandrudabu.com (via Cloudflare Registrar)
+- **SSL**: Auto-provisioned HTTPS certificate
+- **CD**: Auto-deploys on every `git push` to `main` branch
+- **Video Storage**: Cloudflare R2 (for large media files)
+- **Email**: contact@alexandrudabu.com → forwards to personal email
+
+### Build Configuration
+- **Framework**: Vite
+- **Build Command**: `npm run build`
+- **Output Directory**: `dist`
+
+### Cost
+- **$0/month** (all services on free tier)
+- **$10/year** for domain registration only
+
 ## 📂 Project Structure
 
 ```
