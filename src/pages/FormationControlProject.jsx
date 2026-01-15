@@ -113,7 +113,7 @@ const FormationControlProject = () => {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="space-y-3">
                                         <div className="bg-surface/50 rounded-xl overflow-hidden border border-white/10 shadow-lg">
-                                            <VideoPlayer src="https://media.alexandrudabu.com/4Agents.mp4#t=0.1" />
+                                            <VideoPlayer src="https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/4Agents.mp4#t=0.1" />
                                         </div>
                                         <h4 className="font-semibold text-lg">4-Agent Formation</h4>
                                         <p className="text-sm text-gray-400">Basic consensus algorithm achieving multiple different shaped formations with 4 agents.</p>
@@ -121,7 +121,7 @@ const FormationControlProject = () => {
 
                                     <div className="space-y-3">
                                         <div className="bg-surface/50 rounded-xl overflow-hidden border border-white/10 shadow-lg">
-                                            <VideoPlayer src="https://media.alexandrudabu.com/5Agents.mp4#t=0.1" />
+                                            <VideoPlayer src="https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/5Agents.mp4#t=0.1" />
                                         </div>
                                         <h4 className="font-semibold text-lg">5-Agent Formation</h4>
                                         <p className="text-sm text-gray-400">Scalability test with 5 agents achieving multiple different shaped formations.</p>
@@ -129,7 +129,7 @@ const FormationControlProject = () => {
 
                                     <div className="space-y-3 md:col-span-2 md:w-2/3 md:mx-auto">
                                         <div className="bg-surface/50 rounded-xl overflow-hidden border border-white/10 shadow-lg">
-                                            <VideoPlayer src="https://media.alexandrudabu.com/5AgentsSNN.mp4#t=0.1" />
+                                            <VideoPlayer src="https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/5AgentsSNN.mp4#t=0.1" />
                                         </div>
                                         <h4 className="font-semibold text-lg">SNN-based Control</h4>
                                         <p className="text-sm text-gray-400">Advanced control using Spiking Neural Networks for adaptive formation maintenance.</p>

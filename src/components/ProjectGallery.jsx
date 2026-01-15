@@ -35,7 +35,7 @@ const projects = [
         mediaType: "image",
         mediaSrc: "/formation-control-media/image.png",
         link: "/project/formation-control",
-        videoHoverSrc: "https://media.alexandrudabu.com/4Agents.mp4"
+        videoHoverSrc: "https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/4Agents.mp4"
     },
     {
         id: 3,
@@ -45,7 +45,7 @@ const projects = [
         mediaType: "image",
         mediaSrc: "/path-planning/output.png",
         link: "/project/path-planning",
-        videoHoverSrc: "https://media.alexandrudabu.com/pathplanning.mp4",
+        videoHoverSrc: "https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/pathplanning.mp4",
         videoSettings: { startTime: 8, playbackRate: 1.5 }
     }
 ];
