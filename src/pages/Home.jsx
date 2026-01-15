@@ -10,6 +10,7 @@ import About from '../components/About';
 import Contact from '../components/Contact';
 import ScrollReveal from '../components/ScrollReveal';
 import SEO from '../components/SEO';
+import FreelanceCTA from '../components/FreelanceCTA';
 
 const Home = () => {
     return (
@@ -29,9 +30,7 @@ const Home = () => {
             </section>
 
             <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-                <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-                    <ProjectGallery />
-                </section>
+                <ProjectGallery />
             </section>
 
             <section id="timeline" className="py-20 px-4 sm:px-6 lg:px-8 bg-surface/30">
@@ -129,6 +128,12 @@ const Home = () => {
             <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-surface/30">
                 <ScrollReveal>
                     <Contact />
+                </ScrollReveal>
+            </section>
+
+            <section id="freelance-cta" className="py-10 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+                <ScrollReveal>
+                    <FreelanceCTA />
                 </ScrollReveal>
             </section>
         </div>
