@@ -46,7 +46,7 @@ const Hero = () => {
             </p>
 
             <div className="mb-10 relative z-20">
-                <ResumeButton href="/CV2025_EN-2.pdf" />
+                <ResumeButton href="/AlexandruDabu-CV.pdf" />
             </div>
 
             <div className="flex gap-6 mb-24 relative z-20">
