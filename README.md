@@ -8,6 +8,7 @@ A modern, high-performance developer portfolio built with **React**, **Tailwind 
 - **Glassmorphism Design**: Sleek, translucent UI elements with background blurring.
 - **Dark/Light Mode**: Fully theme-aware components with smooth transitions.
 - **Animations**: Powered by `framer-motion` for fluid page transitions and scroll reveals.
+- **Sound Effects**: Custom-synthesized UI sounds using the Web Audio API for a tactile feel.
 - **Responsive**: Mobile-first architecture ensuring perfect rendering on all devices.
 
 ### 🎮 Interactive Playground
@@ -23,6 +24,11 @@ A dedicated section for technical demonstrations and experiments:
     - **Emergent Behavior**: Simulates a flock of birds using Reynolds' 3 rules: _Separation_, _Alignment_, and _Cohesion_.
     - **Customizable Physics**: Real-time sliders to tweak force and speed parameters.
     - **Predator Interaction**: Boids react to mouse hover/touch events.
+
+### ⚡ Performance Engineering
+- **Optimized Assets**: Eager loading and async decoding for critical media to prevent scroll lag.
+- **Efficient Rendering**: Heavy animations (like the particle background) are conditionally unmounted when not in view to save GPU resources.
+- **Memory Management**: Strict cleanup of event listeners and timers to prevent memory leaks in single-page navigation.
 
 ## 🛠️ Tech Stack
 

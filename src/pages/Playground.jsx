@@ -28,7 +28,7 @@ const Playground = () => {
                         className="inline-flex items-center gap-3 bg-surface/50 px-5 py-2 rounded-full border border-primary/20 mb-6"
                     >
                         <Gamepad2 className="w-5 h-5 text-primary animate-pulse" />
-                        <span className="text-sm font-semibold tracking-wide uppercase text-primary">Experimental Zone</span>
+                        <span className="text-sm font-semibold tracking-wide uppercase text-primary animate-pulse">Experimental Zone</span>
                     </motion.div>
 
                     {/* "System Ready" Intro - Typing Title */}
@@ -99,10 +99,10 @@ const Playground = () => {
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={activeGame}
-                                initial={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
-                                animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-                                exit={{ opacity: 0, scale: 1.05, filter: "blur(10px)" }}
-                                transition={{ duration: 0.4 }}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.3, ease: "easeInOut" }}
                                 className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-surface/50 backdrop-blur-sm"
                             >
                                 {activeGame === 'flocking' ? <FlockingSimulation /> : <PathfindingVisualizer />}

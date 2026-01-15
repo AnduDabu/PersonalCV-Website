@@ -197,6 +197,10 @@ const FlockingSimulation = () => {
         // (For simplicity in this loop, we just re-init if count mismatch, 
         // to avoid full re-mount flicker, we do it inside animate or separate effect?
         // Let's stick to separate structure for clarity)
+
+        return () => {
+            window.removeEventListener('resize', updateDimensions);
+        };
     }, []);
 
     // Re-init boids when count changes

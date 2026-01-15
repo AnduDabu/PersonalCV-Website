@@ -1,10 +1,12 @@
 import { TypeAnimation } from 'react-type-animation';
 import ParticlesBackground from './ParticlesBackground';
 import { ChevronDown, Github, Linkedin, Mail, Phone } from 'lucide-react';
+import ResumeButton from './ResumeButton';
+import MagneticWrapper from './MagneticWrapper';
 
 const Hero = () => {
     return (
-        <div className="relative h-[calc(100vh-4rem)] flex flex-col justify-center items-center text-center px-4 overflow-hidden">
+        <div className="relative min-h-screen flex flex-col justify-center items-center text-center px-4 overflow-hidden pt-24 md:pt-32">
             {/* Interactive Particles Background */}
             <ParticlesBackground />
 
@@ -43,30 +45,31 @@ const Hero = () => {
                 Bridging the gap between hardware and software to build intelligent systems that scale.
             </p>
 
-            <div className="mb-10">
-                <a
-                    href="/Alexandru_Dabu_CV.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-8 py-3 bg-primary hover:bg-secondary text-white rounded-full font-bold transition-all shadow-lg hover:shadow-primary/25 hover:-translate-y-1 inline-flex items-center gap-2"
-                >
-                    Download CV
-                </a>
+            <div className="mb-10 relative z-20">
+                <ResumeButton href="/Alexandru_Dabu_CV.pdf" />
             </div>
 
-            <div className="flex gap-6 mb-16">
-                <a href="https://github.com/AnduDabu" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full hover:bg-surface border border-transparent hover:border-primary/50 transition-all group" aria-label="GitHub">
-                    <Github className="w-6 h-6 text-gray-700 dark:text-gray-400 group-hover:text-primary transition-colors" />
-                </a>
-                <a href="https://www.linkedin.com/in/alexandru-dabu" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full hover:bg-surface border border-transparent hover:border-primary/50 transition-all group" aria-label="LinkedIn">
-                    <Linkedin className="w-6 h-6 text-gray-700 dark:text-gray-400 group-hover:text-primary transition-colors" />
-                </a>
-                <a href="mailto:alexandru.dabu123@gmail.com" className="p-3 rounded-full hover:bg-surface border border-transparent hover:border-primary/50 transition-all group" aria-label="Email">
-                    <Mail className="w-6 h-6 text-gray-700 dark:text-gray-400 group-hover:text-primary transition-colors" />
-                </a>
-                <a href="tel:+40756517830" className="p-3 rounded-full hover:bg-surface border border-transparent hover:border-primary/50 transition-all group" aria-label="Phone">
-                    <Phone className="w-6 h-6 text-gray-700 dark:text-gray-400 group-hover:text-primary transition-colors" />
-                </a>
+            <div className="flex gap-6 mb-16 relative z-20">
+                <MagneticWrapper>
+                    <a href="https://github.com/AnduDabu" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full hover:bg-surface border border-transparent hover:border-primary/50 transition-all group block" aria-label="GitHub">
+                        <Github className="w-6 h-6 text-gray-700 dark:text-gray-400 group-hover:text-primary transition-colors" />
+                    </a>
+                </MagneticWrapper>
+                <MagneticWrapper>
+                    <a href="https://www.linkedin.com/in/alexandru-dabu" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full hover:bg-surface border border-transparent hover:border-primary/50 transition-all group block" aria-label="LinkedIn">
+                        <Linkedin className="w-6 h-6 text-gray-700 dark:text-gray-400 group-hover:text-primary transition-colors" />
+                    </a>
+                </MagneticWrapper>
+                <MagneticWrapper>
+                    <a href="mailto:alexandru.dabu123@gmail.com" className="p-3 rounded-full hover:bg-surface border border-transparent hover:border-primary/50 transition-all group block" aria-label="Email">
+                        <Mail className="w-6 h-6 text-gray-700 dark:text-gray-400 group-hover:text-primary transition-colors" />
+                    </a>
+                </MagneticWrapper>
+                <MagneticWrapper>
+                    <a href="tel:+40756517830" className="p-3 rounded-full hover:bg-surface border border-transparent hover:border-primary/50 transition-all group block" aria-label="Phone">
+                        <Phone className="w-6 h-6 text-gray-700 dark:text-gray-400 group-hover:text-primary transition-colors" />
+                    </a>
+                </MagneticWrapper>
             </div>
 
             <div className="absolute bottom-10 animate-bounce">

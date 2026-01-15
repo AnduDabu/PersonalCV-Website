@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, Link, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import Home from './pages/Home';
 import BasketballProject from './pages/BasketballProject';
@@ -8,23 +8,29 @@ import PathPlanningProject from './pages/PathPlanningProject';
 import Playground from './pages/Playground';
 import './index.css';
 
-// Components (some might be used within Home, but imported here as per instruction)
-import Hero from './components/Hero'; // Assuming this is a component, not a page
-import ProjectGallery from './components/ProjectGallery'; // Assuming this is a component
-import Timeline from './components/Timeline'; // Assuming this is a component
-import Skills from './components/Skills'; // Assuming this is a component
+// Components
 import ThemeToggle from './components/ThemeToggle';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
+import ParticlesBackground from './components/ParticlesBackground';
+// Navbar is defined inline in AppContent
+import { ThemeProvider } from './context/ThemeContext';
+import { SoundProvider } from './components/SoundProvider';
+import { Toaster } from 'react-hot-toast';
 
+import { AnimatePresence } from 'framer-motion';
+import PageTransition from './components/PageTransition';
+import ScrollProgressBar from './components/ScrollProgressBar';
+import CustomCursor from './components/CustomCursor';
 
-const App = () => {
+const AppContent = () => {
     const location = useLocation();
     const isHome = location.pathname === '/';
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-    // Initial Navbar Transparency Logic
+    const navItems = ['About', 'Projects', 'Timeline', 'Skills', 'Contact'];
+
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 50);
@@ -34,21 +40,22 @@ const App = () => {
     }, []);
 
     const scrollToSection = (id) => {
-        setIsMobileMenuOpen(false); // Close mobile menu on click
-        if (!isHome) return; // If not on home, Link to="/" handles it
-        // The original navItems array was ['About', 'Projects', 'Timeline', 'Skills', 'Contact'];
-        // The new structure uses item.toLowerCase() for IDs, so 'about', 'projects', etc.
+        setIsMobileMenuOpen(false);
+        if (!isHome) return;
         const element = document.getElementById(id);
         if (element) {
             element.scrollIntoView({ behavior: 'smooth' });
         }
     };
 
-    const navItems = ['About', 'Projects', 'Timeline', 'Skills', 'Contact'];
-
     return (
-        <div className="min-h-screen font-sans text-text bg-background">
+        <div className="min-h-screen font-sans text-text bg-background transition-colors duration-300">
+            <CustomCursor />
+            <ScrollProgressBar />
             <ScrollToTop />
+            <ScrollToTop />
+            {location.pathname !== '/playground' && <ParticlesBackground />}
+
             {/* Navbar */}
             <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-lg border-b border-white/5' : 'bg-transparent'}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -130,22 +137,34 @@ const App = () => {
                     </div>
                 )}
             </nav>
+
             {/* Main Content */}
-            <main className="pt-20"> {/* Adjusted padding to account for h-20 navbar */}
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/basketball-app" element={<BasketballProject />} />
-                    <Route path="/formation-control" element={<FormationControlProject />} />
-                    <Route path="/path-planning" element={<PathPlanningProject />} />
-                    <Route path="/playground" element={<Playground />} />
-                </Routes>
+            <main>
+                <AnimatePresence mode="wait">
+                    <Routes location={location} key={location.pathname}>
+                        <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+                        <Route path="/project/basketball" element={<PageTransition><BasketballProject /></PageTransition>} />
+                        <Route path="/project/formation-control" element={<PageTransition><FormationControlProject /></PageTransition>} />
+                        <Route path="/project/path-planning" element={<PageTransition><PathPlanningProject /></PageTransition>} />
+                        <Route path="/playground" element={<PageTransition><Playground /></PageTransition>} />
+                    </Routes>
+                </AnimatePresence>
             </main>
 
             <Footer />
-        </div >
+            <Toaster position="bottom-right" />
+        </div>
     );
 };
 
-
+const App = () => {
+    return (
+        <ThemeProvider>
+            <SoundProvider>
+                <AppContent />
+            </SoundProvider>
+        </ThemeProvider>
+    );
+};
 
 export default App;

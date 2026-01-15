@@ -101,7 +101,7 @@ const BasketballProject = () => {
             />
 
             {/* Project Hero */}
-            <section className="relative h-[40vh] flex items-center justify-center overflow-hidden">
+            <section className="relative h-[40vh] pt-24 flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-background/95 z-10" />
                 <div className="absolute inset-0 bg-surface z-0">
                     <div className="w-full h-full opacity-30 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/20 via-background to-background"></div>

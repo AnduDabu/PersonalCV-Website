@@ -10,10 +10,10 @@ const data = [
     { subject: 'DevOps', A: 40, fullMark: 100 },
 ];
 
-const SkillsRadar = () => {
+const SkillsRadar = React.memo(() => {
     return (
-        <div className="w-full h-[300px] md:h-[400px] pointer-events-none">
-            <ResponsiveContainer width="100%" height="100%">
+        <div className="w-full h-[300px] md:h-[400px] pointer-events-none" style={{ minHeight: '300px' }}>
+            <ResponsiveContainer width="100%" height="100%" minWidth={300} minHeight={300}>
                 <RadarChart cx="50%" cy="50%" outerRadius="70%" data={data}>
                     <PolarGrid stroke="var(--color-grid)" strokeOpacity={0.5} />
                     <PolarAngleAxis
@@ -28,11 +28,12 @@ const SkillsRadar = () => {
                         strokeWidth={3}
                         fill="rgb(var(--color-primary))"
                         fillOpacity={0.4}
+                        isAnimationActive={false}
                     />
                 </RadarChart>
             </ResponsiveContainer>
         </div>
     );
-};
+});
 
 export default SkillsRadar;

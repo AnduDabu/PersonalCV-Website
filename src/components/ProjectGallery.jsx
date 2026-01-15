@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import VideoPlayer from './VideoPlayer';
+import { motion } from 'framer-motion';
 
 const projects = [
     {
@@ -26,7 +25,7 @@ const projects = [
             "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/chat.png",
             "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/createEventPage.png"
         ],
-        link: "/basketball-app"
+        link: "/project/basketball"
     },
     {
         id: 2,
@@ -35,7 +34,7 @@ const projects = [
         description: "Decentralized control for robust formation maintenance in multi-agent systems.",
         mediaType: "image",
         mediaSrc: "/formation-control-media/image.png",
-        link: "/formation-control",
+        link: "/project/formation-control",
         videoHoverSrc: "https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/4Agents.mp4"
     },
     {
@@ -45,7 +44,7 @@ const projects = [
         description: "Advanced pathfinding algorithms for autonomous navigation in radioactive zones.",
         mediaType: "image",
         mediaSrc: "/path-planning/output.png",
-        link: "/path-planning",
+        link: "/project/path-planning",
         videoHoverSrc: "https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/pathplanning.mp4",
         videoSettings: { startTime: 8, playbackRate: 1.5 }
     }
@@ -109,18 +108,23 @@ const ProjectMedia = ({ type, src, slides, videoHoverSrc, videoSettings, isHover
                     src={src}
                     alt="Project Preview"
                     className="w-full h-full object-cover"
+                    loading="eager"
+                    decoding="async"
                 />
             )}
 
-            {videoHoverSrc && isHovered && (
-                <div className="absolute inset-0 bg-black transition-opacity duration-300">
+            {videoHoverSrc && (
+                <div
+                    className={`absolute inset-0 bg-black transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+                >
                     <video
                         ref={hoverVideoRef}
                         src={videoHoverSrc}
-                        className="w-full h-full object-cover animate-in fade-in duration-300"
+                        className="w-full h-full object-cover"
                         muted
                         loop
                         playsInline
+                        preload="metadata"
                     />
                 </div>
             )}
@@ -132,6 +136,8 @@ const ProjectMedia = ({ type, src, slides, videoHoverSrc, videoSettings, isHover
                         alt="Slide"
                         className="w-full h-full object-cover animate-in fade-in duration-300"
                         key={currentSlide}
+                        loading="eager"
+                        decoding="async"
                     />
                 </div>
             )}
@@ -139,18 +145,21 @@ const ProjectMedia = ({ type, src, slides, videoHoverSrc, videoSettings, isHover
     );
 };
 
-const ProjectCard = ({ project }) => {
+const ProjectCard = ({ project, index }) => {
     const [isHovered, setIsHovered] = React.useState(false);
 
     return (
-        <div
-            className="group bg-surface/50 backdrop-blur-md rounded-2xl p-4 hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 border border-white/5 hover:border-primary flex flex-col hover:bg-surface/80"
+        <motion.div
+            className="group bg-surface rounded-2xl p-4 hover:shadow-2xl hover:shadow-primary/30 transition-colors duration-300 border border-white/5 hover:border-primary flex flex-col h-full"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
         >
             {/* Media Container */}
             <motion.div
-                layout
                 className="mb-5 overflow-hidden rounded-xl bg-black/20 mx-auto"
                 initial={{ aspectRatio: "16/9", width: "100%" }}
                 animate={{
@@ -197,7 +206,7 @@ const ProjectCard = ({ project }) => {
                     </Link>
                 )}
             </div>
-        </div>
+        </motion.div>
     );
 };
 
@@ -210,8 +219,8 @@ const ProjectGallery = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
-                {projects.map((project) => (
-                    <ProjectCard key={project.id} project={project} />
+                {projects.map((project, index) => (
+                    <ProjectCard key={project.id} project={project} index={index} />
                 ))}
             </div>
         </div>

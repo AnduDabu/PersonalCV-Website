@@ -29,9 +29,9 @@ const Home = () => {
             </section>
 
             <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-                <ScrollReveal>
+                <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
                     <ProjectGallery />
-                </ScrollReveal>
+                </section>
             </section>
 
             <section id="timeline" className="py-20 px-4 sm:px-6 lg:px-8 bg-surface/30">
@@ -64,16 +64,17 @@ const Home = () => {
                         <div className="flex flex-col md:flex-row items-center justify-center gap-3 mb-4 text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
                             <motion.div
                                 animate={{
-                                    rotate: [-5, 5, -5],
-                                    y: [-2, 2, -2]
+                                    rotate: [15, -15],
+                                    x: [2, -2]
                                 }}
                                 transition={{
-                                    duration: 2,
+                                    duration: 1.5,
                                     repeat: Infinity,
+                                    repeatType: "reverse",
                                     ease: "easeInOut"
                                 }}
                             >
-                                <Gamepad2 className="w-10 h-10 text-primary drop-shadow-[0_0_8px_rgba(var(--color-primary),0.5)]" />
+                                <Gamepad2 className="w-10 h-10 text-primary" />
                             </motion.div>
 
                             <motion.span
@@ -83,22 +84,7 @@ const Home = () => {
                                 transition={{ duration: 0.5, delay: 0.4 }}
                                 className="flex"
                             >
-                                {Array.from("Want to see something fun?").map((char, index) => (
-                                    <motion.span
-                                        key={index}
-                                        style={{ display: "inline-block", marginRight: char === " " ? "0.3em" : "0" }}
-                                        animate={{ y: [0, -6, 0] }}
-                                        transition={{
-                                            duration: 1.5,
-                                            repeat: Infinity,
-                                            ease: "easeInOut",
-                                            delay: index * 0.1,
-                                            repeatDelay: 2
-                                        }}
-                                    >
-                                        {char === " " ? "\u00A0" : char}
-                                    </motion.span>
-                                ))}
+                                Want to see something fun?
                             </motion.span>
                         </div>
 

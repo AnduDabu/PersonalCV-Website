@@ -291,15 +291,33 @@ const PathfindingVisualizer = () => {
         return nodesInShortestPathOrder;
     };
 
+    // Refs to track timeouts for cleanup
+    const timeoutsRef = useRef([]);
+
+    // Helper to safely schedule timeout
+    const scheduleTimeout = (callback, delay) => {
+        const id = setTimeout(callback, delay);
+        timeoutsRef.current.push(id);
+        return id;
+    };
+
+    // Cleanup on unmount
+    useEffect(() => {
+        return () => {
+            timeoutsRef.current.forEach(clearTimeout);
+            timeoutsRef.current = [];
+        };
+    }, []);
+
     const animatePathfinding = (visitedNodesInOrder, nodesInShortestPathOrder) => {
         for (let i = 0; i <= visitedNodesInOrder.length; i++) {
             if (i === visitedNodesInOrder.length) {
-                setTimeout(() => {
+                scheduleTimeout(() => {
                     animateShortestPath(nodesInShortestPathOrder);
                 }, 10 * i);
                 return;
             }
-            setTimeout(() => {
+            scheduleTimeout(() => {
                 const node = visitedNodesInOrder[i];
                 // Mutate the ORIGINAL grid state (silently) for efficient checking later
                 const realNode = grid[node.row][node.col];
@@ -318,7 +336,7 @@ const PathfindingVisualizer = () => {
 
     const animateShortestPath = (nodesInShortestPathOrder) => {
         for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
-            setTimeout(() => {
+            scheduleTimeout(() => {
                 const node = nodesInShortestPathOrder[i];
                 const realNode = grid[node.row][node.col];
                 if (realNode) realNode.isPath = true;

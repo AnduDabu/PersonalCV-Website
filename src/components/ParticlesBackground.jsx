@@ -17,7 +17,7 @@ const ParticlesBackground = () => {
 
         const initParticles = () => {
             particles = [];
-            const particleCount = Math.min(Math.floor(window.innerWidth * window.innerHeight / 15000), 100);
+            const particleCount = Math.min(Math.floor(window.innerWidth * window.innerHeight / 20000), 50);
 
             for (let i = 0; i < particleCount; i++) {
                 particles.push({
@@ -33,36 +33,36 @@ const ParticlesBackground = () => {
         const drawParticles = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Check theme for color (simple check)
-            const isDark = document.documentElement.classList.contains('dark');
-            const color = isDark ? 'rgba(20, 184, 166, ' : 'rgba(20, 184, 166, '; // Teal-500 base
+            // Use cached color value
+            const particleColor = isDarkRef.current ? 'rgba(255, 255, 255, 0.5)' : 'rgba(20, 184, 166, 0.5)';
 
             particles.forEach((p, index) => {
                 p.x += p.vx;
                 p.y += p.vy;
 
-                // Bounce off edges
                 if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
                 if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
 
-                // Draw particle
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fillStyle = isDark ? 'rgba(255, 255, 255, 0.5)' : 'rgba(20, 184, 166, 0.5)';
+                ctx.fillStyle = particleColor;
                 ctx.fill();
 
-                // Draw connections
                 for (let j = index + 1; j < particles.length; j++) {
                     const p2 = particles[j];
                     const dx = p.x - p2.x;
                     const dy = p.y - p2.y;
+
+                    // Quick check to avoid expensive sqrt
+                    if (Math.abs(dx) > 110 || Math.abs(dy) > 110) continue;
+
                     const distance = Math.sqrt(dx * dx + dy * dy);
 
-                    if (distance < 150) {
+                    if (distance < 110) {
                         ctx.beginPath();
-                        ctx.strokeStyle = isDark
-                            ? `rgba(255, 255, 255, ${0.1 * (1 - distance / 150)})`
-                            : `rgba(20, 184, 166, ${0.15 * (1 - distance / 150)})`;
+                        ctx.strokeStyle = isDarkRef.current
+                            ? `rgba(255, 255, 255, ${0.1 * (1 - distance / 110)})`
+                            : `rgba(20, 184, 166, ${0.15 * (1 - distance / 110)})`;
                         ctx.lineWidth = 1;
                         ctx.moveTo(p.x, p.y);
                         ctx.lineTo(p2.x, p2.y);
@@ -74,14 +74,32 @@ const ParticlesBackground = () => {
             animationFrameId = requestAnimationFrame(drawParticles);
         };
 
+        // Theme observer
+        const isDarkRef = { current: document.documentElement.classList.contains('dark') };
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.attributeName === 'class') {
+                    isDarkRef.current = document.documentElement.classList.contains('dark');
+                }
+            });
+        });
+
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['class'],
+        });
+
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
         drawParticles();
 
         return () => {
+            observer.disconnect();
             window.removeEventListener('resize', resizeCanvas);
             cancelAnimationFrame(animationFrameId);
         };
+
+
     }, []);
 
     return (
