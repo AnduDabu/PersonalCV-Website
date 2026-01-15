@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Download, Check, Loader2, FileText } from 'lucide-react';
 import { useSound } from './SoundProvider';
 
-const ResumeButton = ({ href = "/Alexandru_Dabu_CV.pdf" }) => {
+const ResumeButton = ({ href = "/CV2025_EN-2.pdf" }) => {
     const [status, setStatus] = useState('idle'); // idle, compiling, success
     const { playClick } = useSound();
 
@@ -22,7 +22,7 @@ const ResumeButton = ({ href = "/Alexandru_Dabu_CV.pdf" }) => {
             setTimeout(() => {
                 const link = document.createElement('a');
                 link.href = href;
-                link.download = 'Alexandru_Dabu_CV.pdf';
+                link.download = 'CV2025_EN-2.pdf';
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
