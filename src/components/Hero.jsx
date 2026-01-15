@@ -49,7 +49,7 @@ const Hero = () => {
                 <ResumeButton href="/Alexandru_Dabu_CV.pdf" />
             </div>
 
-            <div className="flex gap-6 mb-16 relative z-20">
+            <div className="flex gap-6 mb-24 relative z-20">
                 <MagneticWrapper>
                     <a href="https://github.com/AnduDabu" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full hover:bg-surface border border-transparent hover:border-primary/50 transition-all group block" aria-label="GitHub">
                         <Github className="w-6 h-6 text-gray-700 dark:text-gray-400 group-hover:text-primary transition-colors" />
@@ -72,7 +72,7 @@ const Hero = () => {
                 </MagneticWrapper>
             </div>
 
-            <div className="absolute bottom-10 animate-bounce">
+            <div className="absolute bottom-8 animate-bounce">
                 <ChevronDown className="w-8 h-8 text-primary" />
             </div>
         </div>
