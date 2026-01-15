@@ -53,7 +53,6 @@ const AppContent = () => {
             <CustomCursor />
             <ScrollProgressBar />
             <ScrollToTop />
-            <ScrollToTop />
             {location.pathname !== '/playground' && <ParticlesBackground />}
 
             {/* Navbar */}

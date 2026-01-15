@@ -126,14 +126,6 @@ const BasketballProject = () => {
                 <ScrollReveal>
                     <Link
                         to="/#projects"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            navigate('/');
-                            setTimeout(() => {
-                                const element = document.getElementById('projects');
-                                if (element) element.scrollIntoView({ behavior: 'smooth' });
-                            }, 100);
-                        }}
                         className="inline-flex items-center gap-2 text-primary hover:text-secondary mb-12 transition-colors font-medium no-underline cursor-pointer"
                     >
                         <ArrowLeft className="w-4 h-4" /> Back to Portfolio

@@ -3,8 +3,9 @@ import FlockingSimulation from '../components/playground/FlockingSimulation';
 import PathfindingVisualizer from '../components/playground/PathfindingVisualizer';
 import FloatingCodeBackground from '../components/playground/FloatingCodeBackground';
 import SEO from '../components/SEO';
-import { Gamepad2, Terminal, Code2, Cpu } from 'lucide-react';
+import { Gamepad2, Terminal, Code2, Cpu, ArrowLeft } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const Playground = () => {
     const [activeGame, setActiveGame] = React.useState('pathfinding');
@@ -19,6 +20,16 @@ const Playground = () => {
 
             <section className="relative py-20 px-4 z-10">
                 <div className="max-w-7xl mx-auto mb-12 text-center">
+
+                    {/* Back Button */}
+                    <div className="flex justify-start mb-8">
+                        <Link
+                            to="/#playground-teaser"
+                            className="inline-flex items-center gap-2 text-primary hover:text-secondary transition-colors font-medium no-underline cursor-pointer"
+                        >
+                            <ArrowLeft className="w-4 h-4" /> Back to Portfolio
+                        </Link>
+                    </div>
 
                     {/* "System Ready" Intro - Badge */}
                     <motion.div

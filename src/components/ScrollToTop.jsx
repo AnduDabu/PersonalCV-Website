@@ -2,16 +2,28 @@ import { useEffect } from 'react';
 import { useLocation, useNavigationType } from 'react-router-dom';
 
 const ScrollToTop = () => {
-    const { pathname } = useLocation();
+    const { pathname, hash } = useLocation();
     const action = useNavigationType();
 
     useEffect(() => {
-        // Only scroll to top if the navigation is a PUSH (new page) or REPLACE
-        // If it's POP (back button), let the browser handle scroll restoration
-        if (action !== 'POP') {
+        // Handle hash scrolling with retry logic
+        if (hash) {
+            const id = hash.replace('#', '');
+            const attemptScroll = (attempts = 0) => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                } else if (attempts < 5) { // Retry for ~500ms
+                    setTimeout(() => attemptScroll(attempts + 1), 100);
+                }
+            };
+            attemptScroll();
+        }
+        // Only scroll to top if NO hash and standard navigation
+        else if (action !== 'POP') {
             window.scrollTo(0, 0);
         }
-    }, [pathname, action]);
+    }, [pathname, hash, action]);
 
     return null;
 };
