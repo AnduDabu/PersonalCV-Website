@@ -10,6 +10,33 @@
   <link rel="apple-touch-icon" sizes="512x512" href="/favicon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Alexandru Dabu | Portfolio</title>
+  <!-- Static fallback. react-helmet-async overrides these per route once React mounts,
+       but crawlers and link unfurlers that do not execute JavaScript only ever see what
+       is in the served HTML. -->
+  <meta name="description"
+    content="Alexandru Dabu - Python developer building automation for IFRS 17 and Solvency II reporting at Allianz Services, and full-stack web applications as a freelancer." />
+  <meta name="theme-color" content="#14b8a6" />
+
+  <!-- Structured data: tells search engines this site is about a person, and which
+       profiles belong to them. -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Alexandru Dabu",
+      "url": "https://www.alexandrudabu.com",
+      "image": "https://www.alexandrudabu.com/profile.jpg",
+      "jobTitle": "Actuarial Python Developer",
+      "worksFor": { "@type": "Organization", "name": "Allianz Services" },
+      "alumniOf": { "@type": "CollegeOrUniversity", "name": "National University of Science and Technology Politehnica Bucharest" },
+      "address": { "@type": "PostalAddress", "addressLocality": "Bucharest", "addressCountry": "RO" },
+      "email": "mailto:contact@alexandrudabu.com",
+      "sameAs": [
+        "https://github.com/AnduDabu",
+        "https://www.linkedin.com/in/alexandru-dabu"
+      ]
+    }
+  </script>
   <!-- Inter Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

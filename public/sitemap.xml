@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Every URL uses the www hostname, matching the canonical tag emitted by SEO.jsx.
+     Listing the apex here as well would re-create the duplicate-content problem the
+     canonical is there to solve. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.alexandrudabu.com/</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.alexandrudabu.com/project/basketball</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.alexandrudabu.com/project/formation-control</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.alexandrudabu.com/project/path-planning</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.alexandrudabu.com/playground</loc>
+    <priority>0.6</priority>
+  </url>
+</urlset>
