@@ -1,0 +1,9 @@
+# Hashed build assets must fail as real 404s. Without this rule they fall through to the
+# SPA catch-all below and the server answers a .js request with index.html, which the
+# browser rejects: "Expected a JavaScript-or-Wasm module script but the server responded
+# with a MIME type of text/html". Anyone still holding an index.html from a previous
+# deploy then gets a blank page instead of a recoverable error.
+/assets/*  /404.html  404
+
+# Everything else is client-side routing and must serve the app shell.
+/*  /index.html  200
