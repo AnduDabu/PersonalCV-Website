@@ -130,7 +130,8 @@ class Boid {
         this.acceleration.y += separation.y * weights.separation;
     }
 
-    update(speedFactor, forceFactor) {
+    // _forceFactor is accepted but not applied — see note in the component below.
+    update(speedFactor, _forceFactor) {
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
         this.velocity.x += this.acceleration.x;
@@ -138,7 +139,6 @@ class Boid {
 
         // Dynamically limit speed based on slider
         const currentMaxSpeed = this.maxSpeed * speedFactor;
-        const currentMaxForce = this.maxForce * forceFactor;
 
         this.limit(this.velocity, currentMaxSpeed);
         this.acceleration.x = 0;
@@ -180,7 +180,6 @@ const FlockingSimulation = () => {
     // Initial setup and loop
     useEffect(() => {
         const canvas = canvasRef.current;
-        const ctx = canvas.getContext('2d');
         // Initial setup
         const updateDimensions = () => {
             const parent = canvas.parentElement;

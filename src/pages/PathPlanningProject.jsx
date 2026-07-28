@@ -1,12 +1,11 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Github, Database, Play } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowLeft, Github, Database } from 'lucide-react';
 import VideoPlayer from '../components/VideoPlayer';
 import ScrollReveal from '../components/ScrollReveal';
 import SEO from '../components/SEO';
 
 const PathPlanningProject = () => {
-    const navigate = useNavigate();
     return (
         <div className="min-h-screen bg-background text-text">
             <SEO

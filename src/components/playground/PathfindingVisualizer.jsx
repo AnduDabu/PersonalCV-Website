@@ -21,9 +21,13 @@ const PathfindingVisualizer = () => {
     const FINISH_NODE_ROW = 10;
     const FINISH_NODE_COL = 35;
 
+    // Seeds the grid once on mount. getInitialGrid is deliberately left out of the
+    // dependency array: it is redefined on every render, so listing it would rebuild the
+    // grid continuously and wipe any walls the user has drawn.
     useEffect(() => {
         const initialGrid = getInitialGrid();
         setGrid(initialGrid);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const getInitialGrid = () => {
@@ -84,21 +88,6 @@ const PathfindingVisualizer = () => {
 
     const scrollContainerRef = useRef(null);
     const lastScrollPos = useRef(null);
-
-    const handleTouchStart = (e) => {
-        if (isRunning) return;
-        if (e.touches.length === 2) {
-            lastScrollPos.current = { x: (e.touches[0].clientX + e.touches[1].clientX) / 2, y: (e.touches[0].clientY + e.touches[1].clientY) / 2 };
-        } else if (e.touches.length === 1) {
-            const touch = e.touches[0];
-            const element = document.elementFromPoint(touch.clientX, touch.clientY);
-            if (element && element.id.startsWith('node-')) {
-                const [_, rowStr, colStr] = element.id.split('-');
-                handleMouseDown(parseInt(rowStr), parseInt(colStr));
-                lastTouchedNode.current = { row: parseInt(rowStr), col: parseInt(colStr) };
-            }
-        }
-    };
 
     // Touch Support
     const handleTouchMove = (e) => {
@@ -196,7 +185,7 @@ const PathfindingVisualizer = () => {
         const visitedNodesInOrder = [];
         startNode.distance = 0;
         const unvisitedNodes = getAllNodes(grid);
-        while (!!unvisitedNodes.length) {
+        while (unvisitedNodes.length) {
             sortNodesByDistance(unvisitedNodes);
             const closestNode = unvisitedNodes.shift();
             if (closestNode.isWall) continue;
@@ -433,8 +422,8 @@ const PathfindingVisualizer = () => {
                         onTouchMove={handleTouchMove}
                         onTouchEnd={handleTouchEnd}
                     >
-                        {grid.map((row, rowIdx) => {
-                            return row.map((node, nodeIdx) => {
+                        {grid.map((row) => {
+                            return row.map((node) => {
                                 return (
                                     <Node
                                         key={`node-${node.row}-${node.col}`}
@@ -493,7 +482,7 @@ const PathfindingVisualizer = () => {
 };
 
 // Extracted and Memoized Node Component
-const Node = React.memo(({ row, col, isFinish, isStart, isWall, isPath, isVisited, onMouseDown, onMouseEnter, onMouseUp, lastTouchedNode, setGrid, grid, getNewGridWithWallToggled }) => {
+const Node = React.memo(({ row, col, isFinish, isStart, isWall, isPath, isVisited, onMouseDown, onMouseEnter, onMouseUp, lastTouchedNode }) => {
     // Custom touch handler for individual node optimization if needed, 
     // but the parent handles main touch logic.
     // We keep onTouchStart for immediate feedback on tap.
@@ -531,5 +520,8 @@ const Node = React.memo(({ row, col, isFinish, isStart, isWall, isPath, isVisite
         prevProps.isFinish === nextProps.isFinish
     );
 });
+
+// React.memo wraps an anonymous arrow function, so the component has no inferred name.
+Node.displayName = 'Node';
 
 export default PathfindingVisualizer;

@@ -1,6 +1,5 @@
-import { ArrowLeft, Smartphone, Layers, Github, Database } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
-import VideoPlayer from '../components/VideoPlayer';
+import { ArrowLeft, Smartphone, Layers } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import FeatureShowcase from '../components/FeatureShowcase';
 import ScrollReveal from '../components/ScrollReveal';
@@ -91,7 +90,6 @@ const featureGroups = [
 ];
 
 const BasketballProject = () => {
-    const navigate = useNavigate();
 
     return (
         <div className="min-h-screen bg-background text-text">

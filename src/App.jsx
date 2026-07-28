@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import Home from './pages/Home';
 import BasketballProject from './pages/BasketballProject';

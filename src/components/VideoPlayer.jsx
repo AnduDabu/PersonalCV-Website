@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Play, Pause, Maximize, Minimize, Settings } from 'lucide-react';
+import { Play, Pause, Maximize, Minimize } from 'lucide-react';
 
 const VideoPlayer = ({ src, poster, aspectRatio = 'aspect-video', objectFit = 'object-contain' }) => {
     const videoRef = useRef(null);

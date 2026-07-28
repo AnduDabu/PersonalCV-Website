@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Download, Check, Loader2, FileText } from 'lucide-react';
+import { Download, Check, Loader2 } from 'lucide-react';
 import { useSound } from './SoundProvider';
 
 const ResumeButton = ({ href = "/AlexandruDabu-CV.pdf" }) => {

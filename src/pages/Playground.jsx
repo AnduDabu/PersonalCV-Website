@@ -3,7 +3,7 @@ import FlockingSimulation from '../components/playground/FlockingSimulation';
 import PathfindingVisualizer from '../components/playground/PathfindingVisualizer';
 import FloatingCodeBackground from '../components/playground/FloatingCodeBackground';
 import SEO from '../components/SEO';
-import { Gamepad2, Terminal, Code2, Cpu, ArrowLeft } from 'lucide-react';
+import { Gamepad2, Code2, Cpu, ArrowLeft } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 

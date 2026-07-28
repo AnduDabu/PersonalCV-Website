@@ -36,4 +36,8 @@ const SkillsRadar = React.memo(() => {
     );
 });
 
+// React.memo wraps an anonymous arrow function, so the component has no inferred name.
+// Without this it shows up as "Anonymous" in React DevTools and error traces.
+SkillsRadar.displayName = 'SkillsRadar';
+
 export default SkillsRadar;
