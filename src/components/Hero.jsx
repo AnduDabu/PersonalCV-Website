@@ -27,11 +27,13 @@ const Hero = () => {
             <div className="text-2xl md:text-3xl text-gray-800 dark:text-gray-300 mb-8 font-light h-[40px]">
                 <TypeAnimation
                     sequence={[
-                        'Software Engineer',
+                        'Python Developer',
                         1000,
-                        'AI Enthusiast',
+                        'Automation Engineer',
                         1000,
-                        'Automation & Computer Science Engineer',
+                        'Full-Stack Developer',
+                        1000,
+                        'Automation & Computer Engineer',
                         2000,
                     ]}
                     wrapper="span"
@@ -41,8 +43,8 @@ const Hero = () => {
             </div>
 
             <p className="max-w-2xl text-lg text-gray-700 dark:text-gray-400 mb-8 leading-relaxed transition-colors">
-                Passionate about crafting AI/ML-driven automation solutions.
-                Bridging the gap between hardware and software to build intelligent systems that scale.
+Turning manual, repetitive processes into reliable automated workflows.
+                Building software across the stack — from data pipelines to production web applications.
             </p>
 
             <div className="mb-10 relative z-20">

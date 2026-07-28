@@ -17,7 +17,7 @@ const Home = () => {
         <div className="relative">
             <SEO
                 title="Home"
-                description="Alexandru Dabu - Automation & Computer Science Engineer specializing in AI, Robotics, and Full-Stack Development."
+                description="Alexandru Dabu - Python developer building automation for IFRS 17 and Solvency II reporting at Allianz Services, and full-stack web applications as a freelancer."
             />
             <section id="hero">
                 <Hero />

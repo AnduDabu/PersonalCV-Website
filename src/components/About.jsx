@@ -1,5 +1,5 @@
 import React from 'react';
-import { FileText, Award, Code, Cpu } from 'lucide-react';
+import { Code, Cpu, Workflow, Globe } from 'lucide-react';
 
 const About = () => {
     return (
@@ -29,18 +29,26 @@ const About = () => {
                     </h3>
 
                     <p className="text-gray-700 dark:text-gray-400 leading-relaxed text-lg">
-                        I am a recent graduate in <strong>Automation and Computer Science</strong> with diverse experience ranging from hardware, low-level programming, and robotics to advanced control design and AI/ML-driven automation.
+                        I am a graduate in <strong>Automation and Computer Engineering</strong>, currently working as a <strong>Python developer within an actuarial team</strong> at Allianz Services, building the internal software behind <strong>IFRS 17</strong> and <strong>Solvency II</strong> reporting.
                     </p>
 
                     <p className="text-gray-700 dark:text-gray-400 leading-relaxed text-lg">
-                        Through my internship and academic projects, I have gained hands-on expertise in building functional systems, including cross-platform mobile applications and computer vision solutions. Successfully blending rigorous engineering principles with creative problem-solving, I focus on developing intelligent systems that are not only effective but also user-centric.
+                        My work is about turning manual, repetitive processes into reliable automated workflows — from data pipelines and Excel reporting to cloud-orchestrated financial model runs. Alongside this, I freelance on full-stack web applications and automation for small businesses.
                     </p>
 
                     <p className="text-gray-700 dark:text-gray-400 leading-relaxed text-lg">
-                        I am a curious and adaptable engineer, always eager to learn new technologies. I thrive on the challenge of bringing ideas to life—whether it's architecting a full-stack application or fine-tuning an AI model—and I am looking for opportunities to grow and collaborate on meaningful projects that drive innovation.
+                        That sits on top of hands-on experience ranging from hardware, low-level programming, and robotics to advanced control design, computer vision, and cross-platform mobile development. I am a curious and adaptable engineer who enjoys bringing ideas to life—whether that means architecting a full-stack application or fine-tuning a model.
                     </p>
 
                     <div className="grid grid-cols-2 gap-4 pt-4">
+                        <div className="p-4 rounded-xl bg-surface border border-white/5 hover:border-primary/20 transition-colors">
+                            <Workflow className="w-8 h-8 text-primary mb-2" />
+                            <h4 className="font-bold">Automation & Data</h4>
+                        </div>
+                        <div className="p-4 rounded-xl bg-surface border border-white/5 hover:border-primary/20 transition-colors">
+                            <Globe className="w-8 h-8 text-primary mb-2" />
+                            <h4 className="font-bold">Full-Stack Web</h4>
+                        </div>
                         <div className="p-4 rounded-xl bg-surface border border-white/5 hover:border-primary/20 transition-colors">
                             <Cpu className="w-8 h-8 text-primary mb-2" />
                             <h4 className="font-bold">AI & Computer Vision</h4>

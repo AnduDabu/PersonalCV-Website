@@ -1,7 +1,29 @@
 import React from 'react';
-import { GraduationCap, Briefcase } from 'lucide-react';
+import { GraduationCap, Briefcase, Code2 } from 'lucide-react';
 
 const timelineData = [
+    {
+        id: 4,
+        type: 'experience',
+        title: 'Actuarial Python Developer',
+        organization: 'Allianz Services',
+        date: 'Dec 2025 - Present',
+        description: 'Developer within the Life & Health actuarial team, automating and optimizing the internal processes behind IFRS 17 and Solvency II reporting for Allianz entities in France.',
+        icon: Briefcase,
+        link: 'https://www.allianz.com/',
+        logo: '/allianz_logo.png'
+    },
+    {
+        id: 5,
+        type: 'experience',
+        title: 'Freelance Developer & Technical Consultant',
+        organization: 'Independent',
+        date: 'Ongoing',
+        description: 'Independent work for local businesses, spanning full-stack web development, design for CNC metal fabrication, and the documentation behind residential solar grid connections.',
+        icon: Code2,
+        link: null,
+        logo: null
+    },
     {
         id: 2,
         type: 'education',
@@ -18,16 +40,16 @@ const timelineData = [
         type: 'experience',
         title: 'Mobile Developer Internship',
         organization: 'Carpasoft',
-        date: 'July 2023 - Oct 2023',
+        date: 'Jul 2024 - Oct 2024',
         description: 'Developed core features for a Pet Management Super-App, including social networking modules, a service marketplace, and an interactive map ecosystem for lost pets.',
         icon: Briefcase,
         link: 'https://carpasoft.com/',
-        logo: 'https://www.google.com/s2/favicons?domain=carpasoft.com&sz=128'
+        logo: '/carpasoft_logo.png'
     },
     {
         id: 3,
         type: 'education',
-        title: 'B.S. in Automatic Control and Computer Engineering',
+        title: 'B.S. in Automation and Computer Engineering',
         organization: 'National University of Science and Technology Politehnica Bucharest',
         date: '2021 - 2025',
         description: 'Specialization in Systems Engineering. Thesis on Basketball Social Media & AI Shot Analysis App.',

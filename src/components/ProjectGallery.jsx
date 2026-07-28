@@ -150,7 +150,7 @@ const ProjectCard = ({ project, index }) => {
 
     return (
         <motion.div
-            className="group bg-surface rounded-2xl p-4 hover:shadow-2xl hover:shadow-primary/30 transition-colors duration-300 border border-white/5 hover:border-primary flex flex-col h-full"
+            className="group bg-surface rounded-2xl p-4 hover:shadow-2xl hover:shadow-primary/30 transition-colors duration-300 border border-white/5 hover:border-primary flex flex-col"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             initial={{ opacity: 0, y: 20 }}
@@ -178,14 +178,20 @@ const ProjectCard = ({ project, index }) => {
                 />
             </motion.div>
 
-            {/* Content */}
-            <div className="flex-grow">
+            {/* Content.
+                The min-heights keep the three cards the same height without `h-full`.
+                `h-full` would make every card stretch to the row height, which is set by
+                the tallest card — so hovering the slideshow card dragged the other two
+                taller with it. Reserving space for the longest title and description
+                instead keeps them aligned while leaving each card free to grow on its own.
+                `mt-auto` then pins the link to the bottom of the content block. */}
+            <div className="flex flex-col flex-grow">
                 {project.link ? (
                     <Link to={project.link}>
-                        <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors cursor-pointer hover:underline">{project.title}</h3>
+                        <h3 className="text-xl font-bold mb-2 min-h-[3.5rem] group-hover:text-primary transition-colors cursor-pointer hover:underline">{project.title}</h3>
                     </Link>
                 ) : (
-                    <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
+                    <h3 className="text-xl font-bold mb-2 min-h-[3.5rem] group-hover:text-primary transition-colors">{project.title}</h3>
                 )}
 
                 <div className="flex flex-wrap gap-2 mb-4">
@@ -196,12 +202,12 @@ const ProjectCard = ({ project, index }) => {
                     ))}
                 </div>
 
-                <p className="text-gray-700 dark:text-gray-400 text-sm leading-relaxed transition-colors">
+                <p className="text-gray-700 dark:text-gray-400 text-sm leading-relaxed min-h-[4.3rem] transition-colors">
                     {project.description}
                 </p>
 
                 {project.link && (
-                    <Link to={project.link} className="inline-block mt-4 text-primary text-sm font-semibold hover:text-white transition-colors">
+                    <Link to={project.link} className="inline-block mt-auto pt-4 text-primary text-sm font-semibold hover:text-white transition-colors">
                         View Case Study →
                     </Link>
                 )}

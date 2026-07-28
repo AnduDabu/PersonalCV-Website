@@ -2,9 +2,11 @@ import React from 'react';
 import SkillsRadar from './SkillsRadar';
 
 const skillsData = {
-    Hardware: ['FPGA', 'Verilog', 'Microcontrollers', 'Embedded Systems', 'PCB Design'],
-    Software: ['Python', 'C', 'C++', 'Java', 'SQL', 'Flutter', 'React', 'Flask', 'OpenCV', 'TensorFlow', 'PyTorch', 'NumPy', 'Pandas'],
-    Tools: ['Docker', 'Git', 'Linux', 'Matlab', 'Simulink', 'Google Cloud Platform']
+    Languages: ['Python', 'TypeScript', 'JavaScript', 'C', 'C++', 'Java', 'SQL', 'VBA', 'PowerShell', 'Verilog'],
+    'Web & Cloud': ['React', 'Next.js', 'Tailwind CSS', 'Node.js', 'Cloudflare Workers', 'Drizzle ORM', 'Flask', 'Flutter', 'Google Cloud Platform'],
+    'Data & AI': ['Pandas', 'NumPy', 'PyTorch', 'TensorFlow', 'OpenCV', 'scikit-learn', 'Data Cleaning & Analysis'],
+    'Domain & Tools': ['IFRS 17', 'Solvency II', 'Risk Agility FM', 'WTW Unify', 'Excel Automation', 'Git', 'Jira/Confluence', 'Agile', 'Docker', 'Linux', 'Matlab', 'Simulink'],
+    Hardware: ['FPGA', 'Microcontrollers', 'Embedded Systems', 'PCB Design']
 };
 
 const Skills = () => {
