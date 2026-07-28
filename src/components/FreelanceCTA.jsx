@@ -15,8 +15,16 @@ const FreelanceCTA = () => {
             {/* Dynamic Background */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-surface to-secondary/10 dark:from-primary/5 dark:via-black dark:to-secondary/5" />
 
-            {/* Animated Grid/Noise Overlay */}
-            <div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+            {/* Noise overlay. Inlined as a data URI: this used to point at
+                grainy-gradients.vercel.app, which now 404s on every page load. A decorative
+                texture is not worth a request to a third-party host that can disappear. */}
+            <div
+                className="absolute inset-0 opacity-[0.03]"
+                style={{
+                    backgroundImage:
+                        "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E\")",
+                }}
+            />
 
             <div className="relative z-10 px-8 py-16 md:py-20 md:px-12 flex flex-col md:flex-row items-center justify-between gap-12">
 
