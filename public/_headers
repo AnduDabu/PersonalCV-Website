@@ -10,7 +10,7 @@
 # script changes, recompute:  node scripts/csp-hash.mjs
 
 /*
-  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'sha256-Pi5sjuXquUWfdQfRCOw/PSYj/daitMiZM6ii4shWqRA=' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; media-src 'self' https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev; connect-src 'self'; frame-src https://www.youtube-nocookie.com https://www.youtube.com https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'sha256-Pi5sjuXquUWfdQfRCOw/PSYj/daitMiZM6ii4shWqRA=' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; media-src 'self' https://media.alexandrudabu.com; connect-src 'self'; frame-src https://www.youtube-nocookie.com https://www.youtube.com https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
   X-Frame-Options: DENY
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
   Referrer-Policy: strict-origin-when-cross-origin

@@ -10,7 +10,7 @@ const featureGroups = [
         items: [
             { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/Iconita%20Aplicatie.webp", caption: "App Icon" },
             { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/GetStartedScreen.webp", caption: "Get Started Screen" },
-            { type: 'video', src: "https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/createAccount.mp4", caption: "Account Creation Flow" },
+            { type: 'video', src: "https://media.alexandrudabu.com/createAccount.mp4", caption: "Account Creation Flow" },
             { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/WelcomeBackScreen.webp", caption: "Welcome Back" },
         ]
     },
@@ -29,7 +29,7 @@ const featureGroups = [
         items: [
             { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/HomeScreen.webp", caption: "Home Dashboard" },
             { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/Sidebar.webp", caption: "Navigation Drawer" },
-            { type: 'video', src: "https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/lightMode.mp4", caption: "Light/Dark Mode Toggle" },
+            { type: 'video', src: "https://media.alexandrudabu.com/lightMode.mp4", caption: "Light/Dark Mode Toggle" },
             { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/lightMode.webp", caption: "Light Mode UI" },
             { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/darkMode.webp", caption: "Dark Mode UI" },
         ]
@@ -37,7 +37,7 @@ const featureGroups = [
     {
         title: "4. Map & Events Ecosystem",
         items: [
-            { type: 'video', src: "https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/Map.mp4", caption: "Interactive Map Demo" },
+            { type: 'video', src: "https://media.alexandrudabu.com/Map.mp4", caption: "Interactive Map Demo" },
             { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/googleMapsSearch.webp", caption: "Location Search" },
             { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/mapPage.webp", caption: "Full Map View" },
             { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/mapPage2.webp", caption: "Court Details" },
@@ -50,7 +50,7 @@ const featureGroups = [
     {
         title: "5. Social Feed",
         items: [
-            { type: 'video', src: "https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/EnterAppandInteractwithPosts.mp4", caption: "Feed Interaction" },
+            { type: 'video', src: "https://media.alexandrudabu.com/EnterAppandInteractwithPosts.mp4", caption: "Feed Interaction" },
             { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/CreatePostPage.webp", caption: "Create Post" },
             { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/createpost2.webp", caption: "Post Editor" },
             { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/postDetailsPage.webp", caption: "Post View" },
@@ -60,11 +60,11 @@ const featureGroups = [
     {
         title: "6. Communication Hub",
         items: [
-            { type: 'video', src: "https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/chat2persons.mp4", caption: "Real-time Messaging", aspectRatio: 'aspect-[1400/1288]', width: '500px' },
+            { type: 'video', src: "https://media.alexandrudabu.com/chat2persons.mp4", caption: "Real-time Messaging", aspectRatio: 'aspect-[1400/1288]', width: '500px' },
             { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/allchatsPage.webp", caption: "Inbox" },
             { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/chat.webp", caption: "Chat Interface" },
             { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/groupChat.webp", caption: "Group Chats" },
-            { type: 'video', src: "https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/chatGPT.mp4", caption: "AI Assistant (ChatGPT)" },
+            { type: 'video', src: "https://media.alexandrudabu.com/chatGPT.mp4", caption: "AI Assistant (ChatGPT)" },
             { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/askChatGptPage1.webp", caption: "Ask AI" },
             { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/askchatGpt2.webp", caption: "AI Conversation" },
         ]
@@ -72,7 +72,7 @@ const featureGroups = [
     {
         title: "7. AI Shot Analysis (Core Feature)",
         items: [
-            { type: 'video', src: "https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/VideoAnalysis.mp4", caption: "Analysis Process" },
+            { type: 'video', src: "https://media.alexandrudabu.com/VideoAnalysis.mp4", caption: "Analysis Process" },
             { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/videoAnalysis.webp", caption: "Tracking Overlay & Object Detection", aspectRatio: 'aspect-video', width: '500px' },
             { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/AIBasketballPage.webp", caption: "AI Dashboard" },
             { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/AIresults.webp", caption: "Mobile Results" },
@@ -82,9 +82,9 @@ const featureGroups = [
     {
         title: "8. System & Settings",
         items: [
-            { type: 'video', src: "https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/Notifications.mp4", caption: "Push Notifications" },
+            { type: 'video', src: "https://media.alexandrudabu.com/Notifications.mp4", caption: "Push Notifications" },
             { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/notificationsPage.webp", caption: "Notification Center" },
-            { type: 'video', src: "https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/connectGoogle.mp4", caption: "Google Integration", objectFit: 'object-cover' },
+            { type: 'video', src: "https://media.alexandrudabu.com/connectGoogle.mp4", caption: "Google Integration", objectFit: 'object-cover' },
         ]
     }
 ];

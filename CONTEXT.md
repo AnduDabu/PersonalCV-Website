@@ -196,11 +196,12 @@ rebuild it there and copy the PDF across — there is no automation.
 - **`SkillsRadar` values are hand-set self-assessments** (`Software Dev 70`, `DevOps 40`, …)
   and are out of date given the Cloudflare/serverless work. They are Alexandru's own
   ratings — ask before changing them.
-- **The R2 videos are still served from the `r2.dev` URL**, which Cloudflare documents as
-  rate-limited and for development only. Re-encoded copies (330 MB → 20 MB, same names,
-  audio kept) are ready to upload; after that, put the bucket behind
-  `media.alexandrudabu.com` and change the host in `src/pages/*.jsx` and
-  `src/components/ProjectGallery.jsx`. See §10.
+- **The R2 videos now use `media.alexandrudabu.com`** (custom domain on bucket `cv-media`,
+  switched in code on 2026-09-17; the `r2.dev` URL is rate-limited and for development
+  only). The bucket still holds the original large files (330 MB); the re-encoded copies
+  (20 MB, same names, audio kept) live in the gitignored `r2-upload/` folder and must be
+  uploaded with `wrangler r2 object put cv-media/<name> --file r2-upload/<name>
+  --content-type video/mp4 --remote`, then purge the zone cache. See §10.
 - `public/Basketball Media/Video Simulari/VideoDemo.mp4` (162 MB) is gitignored, unused,
   and above Pages' 25 MiB per-file limit. It only bloats local `dist/`; safe to delete.
 
@@ -252,5 +253,5 @@ Dashboard-only items not yet done as of 2026-09-17:
   PerplexityBot currently get 403; a portfolio wants to be found).
 - WAF rate-limiting rule (Free plan: one rule, 10 s window): path `/api/contact`,
   > 3 requests per 10 s per IP → block 10 s.
-- R2: upload the re-encoded videos, then add custom domain `media.alexandrudabu.com`.
+- R2: upload the re-encoded videos from `r2-upload/` (the custom domain `media.alexandrudabu.com` already exists and is active; code switched to it on 2026-09-17).
 - Turnstile widget + the secrets in §9.
