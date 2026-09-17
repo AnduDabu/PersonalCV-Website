@@ -128,3 +128,6 @@ public/Basketball Media/Video Simulari/VideoDemo.mp4
 # Wrangler local secrets for `wrangler pages dev`
 .dev.vars
 .wrangler/
+
+# Re-encoded R2 videos waiting for upload (not site assets)
+r2-upload/
