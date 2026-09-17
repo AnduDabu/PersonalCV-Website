@@ -71,8 +71,11 @@ const ParticlesBackground = () => {
                 }
             });
 
-            animationFrameId = requestAnimationFrame(drawParticles);
+            // "Reduce motion": draw the constellation once and stop.
+            if (!reduceMotion) animationFrameId = requestAnimationFrame(drawParticles);
         };
+
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
         // Theme observer
         const isDarkRef = { current: document.documentElement.classList.contains('dark') };

@@ -16,7 +16,7 @@ const Hero = () => {
             {/* Profile Photo */}
             <div className="relative mb-8 group">
                 <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-primary/50 shadow-[0_0_30px_rgba(20,184,166,0.3)] transition-transform duration-300 group-hover:scale-105">
-                    <img src="/profile.jpg?v=1" alt="Alexandru Dabu" className="w-full h-full object-cover" />
+                    <img src="/profile-320.webp" width="320" height="320" alt="Alexandru Dabu" className="w-full h-full object-cover" />
                 </div>
             </div>
 
@@ -63,7 +63,7 @@ Turning manual, repetitive processes into reliable automated workflows.
                     </a>
                 </MagneticWrapper>
                 <MagneticWrapper>
-                    <a href="mailto:alexandru.dabu123@gmail.com" className="p-3 rounded-full hover:bg-surface border border-transparent hover:border-primary/50 transition-all group block" aria-label="Email">
+                    <a href="mailto:contact@alexandrudabu.com" className="p-3 rounded-full hover:bg-surface border border-transparent hover:border-primary/50 transition-all group block" aria-label="Email">
                         <Mail className="w-6 h-6 text-gray-700 dark:text-gray-400 group-hover:text-primary transition-colors" />
                     </a>
                 </MagneticWrapper>

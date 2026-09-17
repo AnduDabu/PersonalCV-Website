@@ -124,3 +124,7 @@ dist
 *.swp
 *.swo
 public/Basketball Media/Video Simulari/VideoDemo.mp4
+
+# Wrangler local secrets for `wrangler pages dev`
+.dev.vars
+.wrangler/

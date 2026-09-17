@@ -8,10 +8,7 @@ import SEO from '../components/SEO';
 const PathPlanningProject = () => {
     return (
         <div className="min-h-screen bg-background text-text">
-            <SEO
-                title="Path Planning"
-                description="Advanced path planning in hazardous environments using optimization algorithms."
-            />
+            <SEO />
             {/* Project Hero */}
             <section className="relative h-[40vh] pt-24 flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-background/95 z-10" />

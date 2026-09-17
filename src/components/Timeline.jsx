@@ -11,7 +11,7 @@ const timelineData = [
         description: 'Developer within the Life & Health actuarial team, automating and optimizing the internal processes behind IFRS 17 and Solvency II reporting for Allianz entities in France.',
         icon: Briefcase,
         link: 'https://www.allianz.com/',
-        logo: '/allianz_logo.png'
+        logo: '/allianz_logo.webp'
     },
     {
         id: 5,
@@ -33,7 +33,7 @@ const timelineData = [
         description: 'Focusing on Digital Transformation in Materials Processing.',
         icon: GraduationCap,
         link: 'https://www.sim.upb.ro/',
-        logo: 'https://www.google.com/s2/favicons?domain=www.sim.upb.ro&sz=128'
+        logo: '/upb_logo.webp'
     },
     {
         id: 1,
@@ -44,7 +44,7 @@ const timelineData = [
         description: 'Developed core features for a Pet Management Super-App, including social networking modules, a service marketplace, and an interactive map ecosystem for lost pets.',
         icon: Briefcase,
         link: 'https://carpasoft.com/',
-        logo: '/carpasoft_logo.png'
+        logo: '/carpasoft_logo.webp'
     },
     {
         id: 3,
@@ -55,7 +55,7 @@ const timelineData = [
         description: 'Specialization in Systems Engineering. Thesis on Basketball Social Media & AI Shot Analysis App.',
         icon: GraduationCap,
         link: 'https://acs.pub.ro/',
-        logo: '/acs_logo.png'
+        logo: '/acs_logo.webp'
     },
 ];
 
@@ -98,7 +98,7 @@ const Timeline = () => {
                                                     ? 'top-4 left-4'
                                                     : 'top-4 left-4 md:left-auto md:right-4'}
                                             `}>
-                                                <img src={item.logo} alt={item.organization} className="w-full h-full object-contain" />
+                                                <img src={item.logo} alt={item.organization} width="48" height="48" loading="lazy" className="w-full h-full object-contain" />
                                             </div>
                                         )}
 

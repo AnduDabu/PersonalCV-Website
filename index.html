@@ -3,19 +3,22 @@
 
 <head>
   <meta charset="UTF-8" />
-  <!-- Favicon for modern browsers -->
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <!-- Favicon fallback for older browsers -->
-  <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
-  <link rel="apple-touch-icon" sizes="512x512" href="/favicon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <title>Alexandru Dabu | Portfolio</title>
-  <!-- Static fallback. react-helmet-async overrides these per route once React mounts,
-       but crawlers and link unfurlers that do not execute JavaScript only ever see what
-       is in the served HTML. -->
+  <!-- Static fallback. scripts/inject-meta.mjs rewrites title/description and adds the
+       Open Graph tags per route at build time; react-helmet-async then keeps them in sync
+       during client-side navigation. Edit the values in src/routesMeta.js. -->
   <meta name="description"
     content="Alexandru Dabu - Python developer building automation for IFRS 17 and Solvency II reporting at Allianz Services, and full-stack web applications as a freelancer." />
   <meta name="theme-color" content="#14b8a6" />
+
+  <!-- Apply the saved/system theme before first paint so dark-mode users do not get a
+       white flash. Static script: its sha256 is allow-listed in public/_headers
+       (recompute with node scripts/csp-hash.mjs after any edit). -->
+  <script id="theme-init">try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark')}catch(e){}</script>
 
   <!-- Structured data: tells search engines this site is about a person, and which
        profiles belong to them. -->
@@ -25,7 +28,7 @@
       "@type": "Person",
       "name": "Alexandru Dabu",
       "url": "https://www.alexandrudabu.com",
-      "image": "https://www.alexandrudabu.com/profile.jpg",
+      "image": "https://www.alexandrudabu.com/profile-800.webp",
       "jobTitle": "Actuarial Python Developer",
       "worksFor": { "@type": "Organization", "name": "Allianz Services" },
       "alumniOf": { "@type": "CollegeOrUniversity", "name": "National University of Science and Technology Politehnica Bucharest" },
@@ -37,10 +40,6 @@
       ]
     }
   </script>
-  <!-- Inter Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body class="bg-background text-text font-sans antialiased">

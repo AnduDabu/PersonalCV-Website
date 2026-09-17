@@ -9,21 +9,21 @@ const projects = [
         tech: ["Python", "YOLOv8", "Flutter", "Flask"],
         description: "Automated shot detection and analysis system integrating computer vision with a mobile app for real-time feedback.",
         mediaType: "slideshow",
-        mediaSrc: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/videoAnalysis.png",
+        mediaSrc: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/videoAnalysis.webp",
         slides: [
-            "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/WelcomeBackScreen.png",
-            "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/postDetailsPage.png",
-            "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/mapPage2.png",
-            "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/notificationsPage.png",
-            "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/HomeScreen.png",
-            "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/GetStartedScreen.png",
-            "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/eventsPage.png",
-            "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/askChatGptPage1.png",
-            "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/askchatGpt2.png",
-            "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/AIBasketballPage.png",
-            "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/AIresults.png",
-            "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/chat.png",
-            "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/createEventPage.png"
+            "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/WelcomeBackScreen.webp",
+            "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/postDetailsPage.webp",
+            "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/mapPage2.webp",
+            "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/notificationsPage.webp",
+            "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/HomeScreen.webp",
+            "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/GetStartedScreen.webp",
+            "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/eventsPage.webp",
+            "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/askChatGptPage1.webp",
+            "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/askchatGpt2.webp",
+            "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/AIBasketballPage.webp",
+            "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/AIresults.webp",
+            "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/chat.webp",
+            "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/createEventPage.webp"
         ],
         link: "/project/basketball"
     },
@@ -33,7 +33,7 @@ const projects = [
         tech: ["Python", "Control Theory", "Consensus Algorithms"],
         description: "Decentralized control for robust formation maintenance in multi-agent systems.",
         mediaType: "image",
-        mediaSrc: "/formation-control-media/image.png",
+        mediaSrc: "/formation-control-media/image.webp",
         link: "/project/formation-control",
         videoHoverSrc: "https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/4Agents.mp4"
     },
@@ -43,14 +43,14 @@ const projects = [
         tech: ["Python", "A*", "RRT", "Optimization"],
         description: "Advanced pathfinding algorithms for autonomous navigation in radioactive zones.",
         mediaType: "image",
-        mediaSrc: "/path-planning/output.png",
+        mediaSrc: "/path-planning/output.webp",
         link: "/project/path-planning",
         videoHoverSrc: "https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/pathplanning.mp4",
         videoSettings: { startTime: 8, playbackRate: 1.5 }
     }
 ];
 
-const ProjectMedia = ({ type, src, slides, videoHoverSrc, videoSettings, isHovered }) => {
+const ProjectMedia = ({ type, src, alt, slides, videoHoverSrc, videoSettings, isHovered }) => {
     const [currentSlide, setCurrentSlide] = React.useState(0);
     const videoRef = React.useRef(null);
     const hoverVideoRef = React.useRef(null);
@@ -106,7 +106,7 @@ const ProjectMedia = ({ type, src, slides, videoHoverSrc, videoSettings, isHover
             ) : (
                 <img
                     src={src}
-                    alt="Project Preview"
+                    alt={alt}
                     className="w-full h-full object-cover"
                     loading="eager"
                     decoding="async"
@@ -133,7 +133,7 @@ const ProjectMedia = ({ type, src, slides, videoHoverSrc, videoSettings, isHover
                 <div className="absolute inset-0 bg-black transition-opacity duration-300">
                     <img
                         src={slides[currentSlide]}
-                        alt="Slide"
+                        alt={`${alt} screenshot ${currentSlide + 1}`}
                         className="w-full h-full object-cover animate-in fade-in duration-300"
                         key={currentSlide}
                         loading="eager"
@@ -171,6 +171,8 @@ const ProjectCard = ({ project, index }) => {
                 <ProjectMedia
                     type={project.mediaType}
                     src={project.mediaSrc}
+
+                    alt={`${project.title} preview`}
                     slides={project.slides}
                     videoHoverSrc={project.videoHoverSrc}
                     videoSettings={project.videoSettings}

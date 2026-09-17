@@ -1,5 +1,9 @@
-import React from 'react';
-import SkillsRadar from './SkillsRadar';
+import React, { lazy, Suspense } from 'react';
+
+// recharts and its dependencies are roughly a third of the JavaScript on this site, for
+// one radar chart. Loading it lazily keeps it out of the entry bundle; the placeholder
+// reserves the same height so nothing shifts when it arrives.
+const SkillsRadar = lazy(() => import('./SkillsRadar'));
 
 const skillsData = {
     Languages: ['Python', 'TypeScript', 'JavaScript', 'C', 'C++', 'Java', 'SQL', 'VBA', 'PowerShell', 'Verilog'],
@@ -21,7 +25,9 @@ const Skills = () => {
                 {/* Skills Visualization */}
                 <div className="order-1 lg:order-1 bg-surface/30 backdrop-blur-sm rounded-2xl p-4 border border-white/5">
                     <h3 className="text-xl font-bold mb-4 text-center text-gray-800 dark:text-gray-200">Expertise Profile</h3>
-                    <SkillsRadar />
+                    <Suspense fallback={<div className="w-full h-[300px] md:h-[400px]" aria-hidden="true" />}>
+                        <SkillsRadar />
+                    </Suspense>
                 </div>
 
                 {/* Skills Tags */}

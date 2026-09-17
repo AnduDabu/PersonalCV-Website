@@ -9,27 +9,27 @@ const Footer = () => {
 
                     {/* Copyright & Branding */}
                     <div className="text-center md:text-left">
-                        <h3 className="text-xl font-bold mb-2">Alexandru <span className="text-primary">Dabu</span></h3>
-                        <p className="text-gray-600 dark:text-gray-500 text-sm">
+                        <p className="text-xl font-bold mb-2">Alexandru <span className="text-primary">Dabu</span></p>
+                        <p className="text-gray-700 dark:text-gray-400 text-sm">
                             © {new Date().getFullYear()} All rights reserved.
                         </p>
                     </div>
 
                     {/* Quick Socials */}
                     <div className="flex gap-6">
-                        <a href="https://github.com/AnduDabu" target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-500 hover:text-primary transition-colors">
-                            <Github className="w-5 h-5" />
+                        <a href="https://github.com/AnduDabu" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="text-gray-700 dark:text-gray-400 hover:text-primary transition-colors">
+                            <Github className="w-5 h-5" aria-hidden="true" />
                         </a>
-                        <a href="https://www.linkedin.com/in/alexandru-dabu" target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-500 hover:text-primary transition-colors">
-                            <Linkedin className="w-5 h-5" />
+                        <a href="https://www.linkedin.com/in/alexandru-dabu" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-gray-700 dark:text-gray-400 hover:text-primary transition-colors">
+                            <Linkedin className="w-5 h-5" aria-hidden="true" />
                         </a>
-                        <a href="mailto:alexandru.dabu123@gmail.com" className="text-gray-600 dark:text-gray-500 hover:text-primary transition-colors">
-                            <Mail className="w-5 h-5" />
+                        <a href="mailto:contact@alexandrudabu.com" aria-label="Email" className="text-gray-700 dark:text-gray-400 hover:text-primary transition-colors">
+                            <Mail className="w-5 h-5" aria-hidden="true" />
                         </a>
                     </div>
                 </div>
 
-                <div className="mt-8 text-center text-gray-700 dark:text-gray-500 text-xs">
+                <div className="mt-8 text-center text-gray-700 dark:text-gray-400 text-xs">
                     Built with <span className="text-primary font-bold">React</span> & <span className="text-primary font-bold">Tailwind CSS</span>
                 </div>
             </div>

@@ -8,82 +8,82 @@ const featureGroups = [
     {
         title: "1. Onboarding & Authentication",
         items: [
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/Iconita%20Aplicatie.png", caption: "App Icon" },
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/GetStartedScreen.png", caption: "Get Started Screen" },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/Iconita%20Aplicatie.webp", caption: "App Icon" },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/GetStartedScreen.webp", caption: "Get Started Screen" },
             { type: 'video', src: "https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/createAccount.mp4", caption: "Account Creation Flow" },
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/WelcomeBackScreen.png", caption: "Welcome Back" },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/WelcomeBackScreen.webp", caption: "Welcome Back" },
         ]
     },
     {
         title: "2. Profile Management",
         items: [
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/CreateProfilePage.png", caption: "Create Profile" },
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/editProfilePage.png", caption: "Edit Details" },
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/ProfilePage.png", caption: "User Profile" },
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/AllUsersPage.png", caption: "Community Browser" },
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/SearchForUser.png", caption: "Search Users" },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/CreateProfilePage.webp", caption: "Create Profile" },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/editProfilePage.webp", caption: "Edit Details" },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/ProfilePage.webp", caption: "User Profile" },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/AllUsersPage.webp", caption: "Community Browser" },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/SearchForUser.webp", caption: "Search Users" },
         ]
     },
     {
         title: "3. Navigation & Dashboard",
         items: [
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/HomeScreen.png", caption: "Home Dashboard" },
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/Sidebar.png", caption: "Navigation Drawer" },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/HomeScreen.webp", caption: "Home Dashboard" },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/Sidebar.webp", caption: "Navigation Drawer" },
             { type: 'video', src: "https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/lightMode.mp4", caption: "Light/Dark Mode Toggle" },
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/lightMode.png", caption: "Light Mode UI" },
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/darkMode.png", caption: "Dark Mode UI" },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/lightMode.webp", caption: "Light Mode UI" },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/darkMode.webp", caption: "Dark Mode UI" },
         ]
     },
     {
         title: "4. Map & Events Ecosystem",
         items: [
             { type: 'video', src: "https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/Map.mp4", caption: "Interactive Map Demo" },
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/googleMapsSearch.png", caption: "Location Search" },
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/mapPage.png", caption: "Full Map View" },
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/mapPage2.png", caption: "Court Details" },
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/MapMarkers.png", caption: "Location Markers" },
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/eventsPage.png", caption: "Events Hub" },
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/createEventPage.png", caption: "Host an Event" },
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/eventDetails.png", caption: "Event Details" },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/googleMapsSearch.webp", caption: "Location Search" },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/mapPage.webp", caption: "Full Map View" },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/mapPage2.webp", caption: "Court Details" },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/MapMarkers.webp", caption: "Location Markers" },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/eventsPage.webp", caption: "Events Hub" },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/createEventPage.webp", caption: "Host an Event" },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/eventDetails.webp", caption: "Event Details" },
         ]
     },
     {
         title: "5. Social Feed",
         items: [
             { type: 'video', src: "https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/EnterAppandInteractwithPosts.mp4", caption: "Feed Interaction" },
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/CreatePostPage.png", caption: "Create Post" },
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/createpost2.png", caption: "Post Editor" },
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/postDetailsPage.png", caption: "Post View" },
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/commentoptions.png", caption: "Comments Interface" },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/CreatePostPage.webp", caption: "Create Post" },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/createpost2.webp", caption: "Post Editor" },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/postDetailsPage.webp", caption: "Post View" },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/commentoptions.webp", caption: "Comments Interface" },
         ]
     },
     {
         title: "6. Communication Hub",
         items: [
             { type: 'video', src: "https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/chat2persons.mp4", caption: "Real-time Messaging", aspectRatio: 'aspect-[1400/1288]', width: '500px' },
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/allchatsPage.png", caption: "Inbox" },
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/chat.png", caption: "Chat Interface" },
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/groupChat.png", caption: "Group Chats" },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/allchatsPage.webp", caption: "Inbox" },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/chat.webp", caption: "Chat Interface" },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/groupChat.webp", caption: "Group Chats" },
             { type: 'video', src: "https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/chatGPT.mp4", caption: "AI Assistant (ChatGPT)" },
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/askChatGptPage1.png", caption: "Ask AI" },
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/askchatGpt2.png", caption: "AI Conversation" },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/askChatGptPage1.webp", caption: "Ask AI" },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/askchatGpt2.webp", caption: "AI Conversation" },
         ]
     },
     {
         title: "7. AI Shot Analysis (Core Feature)",
         items: [
             { type: 'video', src: "https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/VideoAnalysis.mp4", caption: "Analysis Process" },
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/videoAnalysis.png", caption: "Tracking Overlay & Object Detection", aspectRatio: 'aspect-video', width: '500px' },
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/AIBasketballPage.png", caption: "AI Dashboard" },
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/AIresults.png", caption: "Mobile Results" },
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/AIresultsWeb.png", caption: "Detailed Stats", aspectRatio: 'aspect-video', width: '500px' },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/videoAnalysis.webp", caption: "Tracking Overlay & Object Detection", aspectRatio: 'aspect-video', width: '500px' },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/AIBasketballPage.webp", caption: "AI Dashboard" },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/AIresults.webp", caption: "Mobile Results" },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/AIresultsWeb.webp", caption: "Detailed Stats", aspectRatio: 'aspect-video', width: '500px' },
         ]
     },
     {
         title: "8. System & Settings",
         items: [
             { type: 'video', src: "https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/Notifications.mp4", caption: "Push Notifications" },
-            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/notificationsPage.png", caption: "Notification Center" },
+            { type: 'image', src: "/Basketball%20Media/Poze%20simulator%20aplicatie%20baschet/notificationsPage.webp", caption: "Notification Center" },
             { type: 'video', src: "https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/connectGoogle.mp4", caption: "Google Integration", objectFit: 'object-cover' },
         ]
     }
@@ -93,10 +93,7 @@ const BasketballProject = () => {
 
     return (
         <div className="min-h-screen bg-background text-text">
-            <SEO
-                title="Basketball AI App"
-                description="AI-powered Basketball Social Media App with shot analysis and real-time feedback."
-            />
+            <SEO />
 
             {/* Project Hero */}
             <section className="relative h-[40vh] pt-24 flex items-center justify-center overflow-hidden">
@@ -181,7 +178,8 @@ const BasketballProject = () => {
                             <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
                                 <iframe
                                     className="absolute top-0 left-0 w-full h-full"
-                                    src="https://www.youtube.com/embed/1sgGy72bJwo"
+                                    src="https://www.youtube-nocookie.com/embed/1sgGy72bJwo"
+                                    loading="lazy"
                                     title="Basketball Social App - Full Demo"
                                     frameBorder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

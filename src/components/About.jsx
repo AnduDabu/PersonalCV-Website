@@ -11,7 +11,10 @@ const About = () => {
                 <div className="relative">
                     <div className="aspect-square rounded-2xl overflow-hidden bg-surface/50 border border-white/5 relative z-10 group">
                         <img
-                            src="/profile.jpg?v=1"
+                            src="/profile-800.webp"
+                            width="800"
+                            height="800"
+                            loading="lazy"
                             alt="Alexandru Dabu"
                             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                         />

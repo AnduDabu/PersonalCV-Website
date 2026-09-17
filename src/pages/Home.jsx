@@ -15,10 +15,7 @@ import FreelanceCTA from '../components/FreelanceCTA';
 const Home = () => {
     return (
         <div className="relative">
-            <SEO
-                title="Home"
-                description="Alexandru Dabu - Python developer building automation for IFRS 17 and Solvency II reporting at Allianz Services, and full-stack web applications as a freelancer."
-            />
+            <SEO />
             <section id="hero">
                 <Hero />
             </section>
