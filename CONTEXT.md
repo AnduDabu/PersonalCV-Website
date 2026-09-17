@@ -256,9 +256,13 @@ Done via the Cloudflare API on 2026-09-17 (verified with curl):
 - Pages variables (Production and Preview): `VITE_TURNSTILE_SITE_KEY`, `EMAILJS_SERVICE_ID`,
   `EMAILJS_TEMPLATE_ID`, `EMAILJS_PUBLIC_KEY`.
 
-Still pending in the dashboard (API writes were refused by the agent's permission layer):
+Also done: secret `TURNSTILE_SECRET` on Production and Preview; the preview build was
+retried and its bundle carries the real site key.
 
-- Security > Bots: turn off Bot Fight Mode and set "Block AI bots" to off.
-- Pages > Settings > Variables and Secrets: secrets `TURNSTILE_SECRET` (from Turnstile >
-  the widget > Secret key) and `EMAILJS_PRIVATE_KEY`, both for Production and Preview.
-  Then retry the latest `audit-fixes` deployment so the build picks up the site key.
+Still pending in the dashboard:
+
+- Security > Bots: turn off Bot Fight Mode and set "Block AI bots" to off. The API refuses
+  this endpoint for OAuth tokens (error 10405), so it is dashboard-only.
+- Pages > Settings > Variables and Secrets: secret `EMAILJS_PRIVATE_KEY` (EmailJS >
+  Account > General > Private Key), Production and Preview. Until it exists the Function
+  answers `503 not_configured`. Secrets are read at request time, so no rebuild is needed.
