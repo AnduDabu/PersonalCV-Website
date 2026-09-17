@@ -245,13 +245,20 @@ Expected report while Bot Fight Mode is on: Cloudflare's own inline JavaScript D
 snippet, which cannot be hashed (it changes per response). Options: turn Bot Fight Mode off
 (recommended; a static site gains nothing from it), or accept the console noise.
 
-Dashboard-only items not yet done as of 2026-09-17:
+Done via the Cloudflare API on 2026-09-17 (verified with curl):
 
-- Redirect Rule apex → www (§3).
-- Zone-level HSTS: SSL/TLS > Edge Certificates > HSTS, max-age 6 months, no preload.
-- Security > Bots: turn off Bot Fight Mode and the AI-crawler block (GPTBot, ClaudeBot and
-  PerplexityBot currently get 403; a portfolio wants to be found).
-- WAF rate-limiting rule (Free plan: one rule, 10 s window): path `/api/contact`,
-  > 3 requests per 10 s per IP → block 10 s.
-- R2: upload the re-encoded videos from `r2-upload/` (the custom domain `media.alexandrudabu.com` already exists and is active; code switched to it on 2026-09-17).
-- Turnstile widget + the secrets in §9.
+- Redirect Rule apex → www, 301, query string preserved (ruleset `b84cdb77…`).
+- Zone HSTS: max-age 15552000 (6 months), no subdomains, no preload.
+- WAF rate-limiting rule on `/api/contact`: > 3 requests per 10 s per IP → block 10 s.
+- R2: re-encoded videos uploaded to `cv-media` (same names), zone cache purged; the code
+  now uses `media.alexandrudabu.com`.
+- Turnstile widget `0x4AAAAAAE6DPXAfdCHNkVq3` (managed, hostnames www/apex/pages.dev).
+- Pages variables (Production and Preview): `VITE_TURNSTILE_SITE_KEY`, `EMAILJS_SERVICE_ID`,
+  `EMAILJS_TEMPLATE_ID`, `EMAILJS_PUBLIC_KEY`.
+
+Still pending in the dashboard (API writes were refused by the agent's permission layer):
+
+- Security > Bots: turn off Bot Fight Mode and set "Block AI bots" to off.
+- Pages > Settings > Variables and Secrets: secrets `TURNSTILE_SECRET` (from Turnstile >
+  the widget > Secret key) and `EMAILJS_PRIVATE_KEY`, both for Production and Preview.
+  Then retry the latest `audit-fixes` deployment so the build picks up the site key.
