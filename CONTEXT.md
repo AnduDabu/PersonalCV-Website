@@ -233,6 +233,42 @@ locally; never set the test secret in production.
 
 ---
 
+## 9b. Sending from contact@alexandrudabu.com instead of a personal Gmail
+
+EmailJS delivers through the connected Gmail account, so the notification arrives **from**
+`alexandru.dabu123@gmail.com`. Nothing in an EmailJS template changes that: the sender is
+whatever account the service is connected to. Making the mail come from the domain needs a
+service that is authorised to send for `alexandrudabu.com`.
+
+Cloudflare Email Service is the natural fit here. Email Routing already handles the inbound
+half (`contact@alexandrudabu.com` forwards to the Gmail address), and **sending to an address
+already verified as a routing destination is free on every plan**, which is exactly this case.
+It also removes two standing liabilities: the EmailJS quota (200 messages a month) and the
+Gmail OAuth grant, which expired once already and silently broke the live form.
+
+`functions/api/contact.js` now picks its delivery route at request time:
+
+- All four of `CF_EMAIL_TOKEN`, `CF_ACCOUNT_ID`, `CONTACT_FROM`, `CONTACT_TO` present →
+  Cloudflare Email Service, `From: contact@alexandrudabu.com`, `Reply-To:` the visitor.
+- Otherwise → EmailJS, exactly as before.
+
+So the code can ship before the account work is done, and the switch happens the moment the
+variables appear. No flag day, and rolling back means deleting one variable.
+
+Two steps are needed to activate it, both outside this repo:
+
+1. Cloudflare dashboard > Compute > Email Service > Email Sending > **Onboard Domain**, pick
+   `alexandrudabu.com`. It adds MX, SPF, DKIM and DMARC records on the `cf-bounce` subdomain.
+2. Create an API token with **Email Sending: Edit**, then add to Pages (Production and
+   Preview): `CF_EMAIL_TOKEN` as a secret, plus plain variables `CF_ACCOUNT_ID`
+   (`bbf9f5d29d6f831f734de1f323d6b1cb`), `CONTACT_FROM` (`contact@alexandrudabu.com`) and
+   `CONTACT_TO` (`alexandru.dabu123@gmail.com`). Remember that Pages binds variables at
+   deployment time, so retry the deployment afterwards.
+
+Email Sending is in beta. If it disappoints, deleting `CF_EMAIL_TOKEN` puts EmailJS back.
+
+---
+
 ## 10. Security headers and things still pending in the dashboard
 
 `public/_headers` ships a **Report-Only** CSP (verified with zero violations in headless

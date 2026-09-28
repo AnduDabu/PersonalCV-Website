@@ -64,7 +64,10 @@ export async function onRequestPost({ request, env }) {
     if (message.length < 5 || message.length > MAX_MESSAGE) return json({ error: 'invalid_message' }, 400);
     if (!token) return json({ error: 'captcha_missing' }, 400);
 
-    if (!env.TURNSTILE_SECRET || !env.EMAILJS_PRIVATE_KEY) {
+    const viaCloudflare = Boolean(
+        env.CF_EMAIL_TOKEN && env.CF_ACCOUNT_ID && env.CONTACT_FROM && env.CONTACT_TO,
+    );
+    if (!env.TURNSTILE_SECRET || !(viaCloudflare || env.EMAILJS_PRIVATE_KEY)) {
         // Secrets not configured for this environment (typically a fresh preview).
         return json({ error: 'not_configured' }, 503);
     }
@@ -80,7 +83,61 @@ export async function onRequestPost({ request, env }) {
     }).then((r) => r.json()).catch(() => ({ success: false }));
     if (!verify.success) return json({ error: 'captcha_failed' }, 403);
 
-    const send = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+    const sent = viaCloudflare
+        ? await deliverViaCloudflare(env, { name, email, message })
+        : await deliverViaEmailJS(env, { name, email, message });
+    if (!sent.ok) {
+        // Providers answer with a short reason, e.g. "API access from non-browser environments
+        // is currently disabled." Swallowing it once cost an afternoon, so log it and echo it
+        // back on preview deployments, where only we can see it.
+        console.error('Contact send failed:', sent.via, sent.status, sent.detail);
+        const isPreview = new URL(request.url).hostname.endsWith('.pages.dev');
+        return json(
+            { error: 'send_failed', ...(isPreview && { status: sent.status, detail: sent.detail.slice(0, 300) }) },
+            502,
+        );
+    }
+    return json({ ok: true });
+}
+
+// Cloudflare Email Service. Used once CF_EMAIL_TOKEN, CF_ACCOUNT_ID, CONTACT_FROM and
+// CONTACT_TO exist, so the notification comes from the site's own domain rather than from a
+// personal Gmail account. Sending to an address already verified as an Email Routing
+// destination is free on every plan.
+async function deliverViaCloudflare(env, { name, email, message }) {
+    const res = await fetch(
+        `https://api.cloudflare.com/client/v4/accounts/${env.CF_ACCOUNT_ID}/email/sending/send`,
+        {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${env.CF_EMAIL_TOKEN}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                from: { address: env.CONTACT_FROM, name: 'alexandrudabu.com' },
+                to: env.CONTACT_TO,
+                // Hitting reply answers the visitor instead of yourself.
+                reply_to: { address: email, name },
+                subject: `Contact form: ${name}`,
+                text: `From: ${name} <${email}>\n\n${message}\n`,
+            }),
+        },
+    );
+    const detail = await res.text().catch(() => '');
+    // This API can answer 200 with success:false, so the flag decides rather than the status.
+    let ok = res.ok;
+    try {
+        ok = ok && JSON.parse(detail).success !== false;
+    } catch {
+        ok = false;
+    }
+    return { via: 'cloudflare', ok, status: res.status, detail };
+}
+
+// EmailJS, the original path. Kept so the form keeps working until the Cloudflare variables
+// are in place, and as a fallback if that route ever has to be rolled back.
+async function deliverViaEmailJS(env, { name, email, message }) {
+    const res = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -92,19 +149,12 @@ export async function onRequestPost({ request, env }) {
             template_params: { name, email, message },
         }),
     });
-    if (!send.ok) {
-        // EmailJS answers with a short plain-text reason, e.g. "API access from non-browser
-        // environments is currently disabled." Swallowing it once cost an afternoon, so log it
-        // and echo it back on preview deployments, where only we can see it.
-        const detail = await send.text().catch(() => '');
-        console.error('EmailJS send failed:', send.status, detail);
-        const isPreview = new URL(request.url).hostname.endsWith('.pages.dev');
-        return json(
-            { error: 'send_failed', ...(isPreview && { status: send.status, detail: detail.slice(0, 300) }) },
-            502,
-        );
-    }
-    return json({ ok: true });
+    return {
+        via: 'emailjs',
+        ok: res.ok,
+        status: res.status,
+        detail: res.ok ? '' : await res.text().catch(() => ''),
+    };
 }
 
 // Anything but POST on this path.
