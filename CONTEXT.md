@@ -298,4 +298,19 @@ the private key itself was never the problem. The Function used to swallow this 
 answer a bare `send_failed`. It now logs the upstream status and body, and echoes them back
 on `*.pages.dev` deployments only, so a preview submission names its own cause.
 
+With that switch on, the preview submission got all the way through Turnstile and the private
+key, and failed further downstream:
+
+```
+Gmail_API: Invalid grant. Please reconnect your Gmail account
+```
+
+That is the EmailJS **service** connection, not anything in this repo. The Google OAuth grant
+behind service `service_y36z8s9` has expired. Fix it at EmailJS > Email Services > the Gmail
+service > reconnect, then re-authorise with the Google account that receives the mail.
+
+**This failure predates the rewrite.** The old browser-side `sendForm()` used the same service,
+so the contact form on the live site has almost certainly been failing silently too — the old
+code surfaced no reason, which is exactly why the Function now reports one.
+
 Once a preview submission lands in the inbox, merge `audit-fixes` into `main`.
