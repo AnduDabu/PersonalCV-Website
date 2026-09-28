@@ -233,6 +233,25 @@ locally; never set the test secret in production.
 
 ---
 
+## 9b. Sender address: deferred (2026-09-28)
+
+The contact notification arrives **from** `alexandru.dabu123@gmail.com`, because EmailJS
+delivers through the connected Gmail account. No EmailJS template setting changes that; the
+sender is whichever account the service is connected to.
+
+Making it come from `contact@alexandrudabu.com` was built and left unmerged on branch
+**`email-from-domain`** (commit `da45754`). There the Function picks its route per request:
+Cloudflare Email Service when `CF_EMAIL_TOKEN`, `CF_ACCOUNT_ID`, `CONTACT_FROM` and
+`CONTACT_TO` all exist, otherwise EmailJS unchanged. That branch's own CONTEXT.md §9b has the
+full reasoning and the two account steps needed (onboard the domain under Compute > Email
+Service > Email Sending, and mint an API token with Email Sending: Edit). Sending to an
+address already verified as an Email Routing destination is free on every plan.
+
+Alexandru chose to leave the current behaviour alone for now. Pick the branch up if the
+EmailJS quota (200 a month) or the Gmail OAuth grant becomes a problem again.
+
+---
+
 ## 10. Security headers and things still pending in the dashboard
 
 `public/_headers` ships a **Report-Only** CSP (verified with zero violations in headless
