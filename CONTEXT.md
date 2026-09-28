@@ -259,10 +259,15 @@ Done via the Cloudflare API on 2026-09-17 (verified with curl):
 Also done: secret `TURNSTILE_SECRET` on Production and Preview; the preview build was
 retried and its bundle carries the real site key.
 
+Bot Fight Mode was turned off in the dashboard on 2026-09-28 (verified: `fight_mode: false`).
+
 Still pending in the dashboard:
 
-- Security > Bots: turn off Bot Fight Mode and set "Block AI bots" to off. The API refuses
-  this endpoint for OAuth tokens (error 10405), so it is dashboard-only.
+- Security > Bots: set "Block AI bots" to off. ClaudeBot and GPTBot still get 403 on
+  `www.alexandrudabu.com` (verified 2026-09-28). The `bot_management` endpoint refuses
+  OAuth tokens (error 10405) and the block is not in any editable ruleset, so this is
+  dashboard-only.
 - Pages > Settings > Variables and Secrets: secret `EMAILJS_PRIVATE_KEY` (EmailJS >
-  Account > General > Private Key), Production and Preview. Until it exists the Function
+  Account > General > Private Key), Production and Preview. It is NOT set — the project
+  has only the five variables visible in the dashboard, and the preview Function still
   answers `503 not_configured`. Secrets are read at request time, so no rebuild is needed.
