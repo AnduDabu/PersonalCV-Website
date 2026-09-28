@@ -8,10 +8,7 @@ import SEO from '../components/SEO';
 const FormationControlProject = () => {
     return (
         <div className="min-h-screen bg-background text-text">
-            <SEO
-                title="Formation Control"
-                description="Multi-Agent Formation Control using decentralized consensus algorithms in Python."
-            />
+            <SEO />
             {/* Project Hero */}
             <section className="relative h-[40vh] pt-24 flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-background/95 z-10" />
@@ -78,7 +75,7 @@ const FormationControlProject = () => {
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                                 <div className="space-y-4">
-                                    <h4 className="text-xl font-bold text-gray-100">🧠 Spiking Neural Network (SNN)</h4>
+                                    <h4 className="text-xl font-bold text-gray-900 dark:text-gray-100">🧠 Spiking Neural Network (SNN)</h4>
                                     <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
                                         The advanced controller is built using the <strong>Norse</strong> library for deep learning with spikes. Unlike traditional ANNs, this model uses <strong>Leaky Integrate-and-Fire (LIF)</strong> neurons that mimic biological spiking behavior.
                                     </p>
@@ -90,7 +87,7 @@ const FormationControlProject = () => {
                                 </div>
 
                                 <div className="space-y-4">
-                                    <h4 className="text-xl font-bold text-gray-100">🛡️ Safety via Control Barrier Functions</h4>
+                                    <h4 className="text-xl font-bold text-gray-900 dark:text-gray-100">🛡️ Safety via Control Barrier Functions</h4>
                                     <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
                                         Safety is paramount in autonomous systems. We utilize <strong>Control Barrier Functions (CBFs)</strong> to guarantee collision avoidance.
                                     </p>
@@ -112,7 +109,7 @@ const FormationControlProject = () => {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="space-y-3">
                                         <div className="bg-surface/50 rounded-xl overflow-hidden border border-white/10 shadow-lg">
-                                            <VideoPlayer src="https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/4Agents.mp4#t=0.1" />
+                                            <VideoPlayer src="https://media.alexandrudabu.com/4Agents.mp4#t=0.1" />
                                         </div>
                                         <h4 className="font-semibold text-lg">4-Agent Formation</h4>
                                         <p className="text-sm text-gray-400">Basic consensus algorithm achieving multiple different shaped formations with 4 agents.</p>
@@ -120,7 +117,7 @@ const FormationControlProject = () => {
 
                                     <div className="space-y-3">
                                         <div className="bg-surface/50 rounded-xl overflow-hidden border border-white/10 shadow-lg">
-                                            <VideoPlayer src="https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/5Agents.mp4#t=0.1" />
+                                            <VideoPlayer src="https://media.alexandrudabu.com/5Agents.mp4#t=0.1" />
                                         </div>
                                         <h4 className="font-semibold text-lg">5-Agent Formation</h4>
                                         <p className="text-sm text-gray-400">Scalability test with 5 agents achieving multiple different shaped formations.</p>
@@ -128,7 +125,7 @@ const FormationControlProject = () => {
 
                                     <div className="space-y-3 md:col-span-2 md:w-2/3 md:mx-auto">
                                         <div className="bg-surface/50 rounded-xl overflow-hidden border border-white/10 shadow-lg">
-                                            <VideoPlayer src="https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/5AgentsSNN.mp4#t=0.1" />
+                                            <VideoPlayer src="https://media.alexandrudabu.com/5AgentsSNN.mp4#t=0.1" />
                                         </div>
                                         <h4 className="font-semibold text-lg">SNN-based Control</h4>
                                         <p className="text-sm text-gray-400">Advanced control using Spiking Neural Networks for adaptive formation maintenance.</p>

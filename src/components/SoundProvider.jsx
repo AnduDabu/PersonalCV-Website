@@ -31,16 +31,20 @@ export const SoundProvider = ({ children }) => {
 
     // Load preference from local storage
     useEffect(() => {
-        const saved = localStorage.getItem('soundEnabled');
-        if (saved !== null) {
-            setSoundEnabled(JSON.parse(saved));
+        // A corrupted value here used to throw during render and blank the whole app
+        // until the visitor cleared site data. Treat anything unparsable as "off".
+        try {
+            const saved = localStorage.getItem('soundEnabled');
+            if (saved !== null) setSoundEnabled(JSON.parse(saved) === true);
+        } catch {
+            setSoundEnabled(false);
         }
     }, []);
 
     const toggleSound = () => {
         setSoundEnabled(prev => {
             const newState = !prev;
-            localStorage.setItem('soundEnabled', JSON.stringify(newState));
+            try { localStorage.setItem('soundEnabled', JSON.stringify(newState)); } catch { /* storage blocked */ }
             if (newState) {
                 // Initialize context immediately when enabled to be ready
                 getAudioContext();

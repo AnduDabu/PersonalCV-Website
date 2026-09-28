@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Play, Pause, Maximize, Minimize } from 'lucide-react';
 
-const VideoPlayer = ({ src, poster, aspectRatio = 'aspect-video', objectFit = 'object-contain' }) => {
+const VideoPlayer = ({ src, poster, aspectRatio = 'aspect-video', objectFit = 'object-contain', title = 'Video' }) => {
     const videoRef = useRef(null);
     const containerRef = useRef(null);
     const [isPlaying, setIsPlaying] = useState(false);
@@ -22,30 +22,37 @@ const VideoPlayer = ({ src, poster, aspectRatio = 'aspect-video', objectFit = 'o
             setCurrentTime(video.currentTime);
             setProgress((video.currentTime / video.duration) * 100);
         };
-
-        const updateDuration = () => {
-            setDuration(video.duration);
-        }
+        const updateDuration = () => setDuration(video.duration);
+        // Keep isPlaying truthful whatever started or stopped playback.
+        const onPlay = () => setIsPlaying(true);
+        const onPause = () => setIsPlaying(false);
+        // Esc leaves fullscreen without going through our button.
+        const onFullscreenChange = () => setIsFullscreen(document.fullscreenElement === containerRef.current);
 
         video.addEventListener('timeupdate', updateTime);
         video.addEventListener('loadedmetadata', updateDuration);
+        video.addEventListener('play', onPlay);
+        video.addEventListener('pause', onPause);
+        document.addEventListener('fullscreenchange', onFullscreenChange);
 
         return () => {
             video.removeEventListener('timeupdate', updateTime);
             video.removeEventListener('loadedmetadata', updateDuration);
+            video.removeEventListener('play', onPlay);
+            video.removeEventListener('pause', onPause);
+            document.removeEventListener('fullscreenchange', onFullscreenChange);
         };
     }, []);
 
     const togglePlay = (e) => {
         e.stopPropagation();
         if (showSpeedMenu) setShowSpeedMenu(false);
-        if (videoRef.current) {
-            if (isPlaying) {
-                videoRef.current.pause();
-            } else {
-                videoRef.current.play();
-            }
-            setIsPlaying(!isPlaying);
+        const video = videoRef.current;
+        if (!video) return;
+        if (video.paused) {
+            video.play().catch(() => { /* autoplay policy or aborted by a quick pause */ });
+        } else {
+            video.pause();
         }
     };
 
@@ -59,11 +66,9 @@ const VideoPlayer = ({ src, poster, aspectRatio = 'aspect-video', objectFit = 'o
     const toggleFullscreen = (e) => {
         e.stopPropagation();
         if (!document.fullscreenElement) {
-            containerRef.current.requestFullscreen();
-            setIsFullscreen(true);
+            containerRef.current.requestFullscreen?.();
         } else {
-            document.exitFullscreen();
-            setIsFullscreen(false);
+            document.exitFullscreen?.();
         }
     };
 
@@ -94,18 +99,19 @@ const VideoPlayer = ({ src, poster, aspectRatio = 'aspect-video', objectFit = 'o
                 className={`w-full h-full ${objectFit}`}
                 src={src}
                 poster={poster}
-                onEnded={() => setIsPlaying(false)}
+                preload="metadata"
                 playsInline
+                aria-label={title}
             />
 
             {/* Overlay controls - appear on hover or when paused */}
-            <div className={`absolute inset-0 bg-black/40 flex flex-col justify-end transition-opacity duration-300 ${isPlaying ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'}`}>
+            <div className={`absolute inset-0 bg-black/40 flex flex-col justify-end transition-opacity duration-300 ${isPlaying ? 'opacity-0 group-hover:opacity-100 group-focus-within:opacity-100' : 'opacity-100'}`}>
 
                 {/* Center Play Button (Only when paused) */}
                 {!isPlaying && (
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                         <div className="bg-white/10 backdrop-blur-sm p-5 rounded-full ring-1 ring-white/20 shadow-2xl">
-                            <Play className="w-10 h-10 text-white fill-white" />
+                            <Play className="w-10 h-10 text-white fill-white" aria-hidden="true" />
                         </div>
                     </div>
                 )}
@@ -123,6 +129,7 @@ const VideoPlayer = ({ src, poster, aspectRatio = 'aspect-video', objectFit = 'o
                             max="100"
                             value={progress || 0}
                             onChange={handleSeek}
+                            aria-label="Seek"
                             className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                         />
                         <div
@@ -135,8 +142,8 @@ const VideoPlayer = ({ src, poster, aspectRatio = 'aspect-video', objectFit = 'o
 
                     <div className="flex items-center justify-between text-white">
                         <div className="flex items-center gap-3">
-                            <button onClick={togglePlay} className="hover:text-primary transition-colors">
-                                {isPlaying ? <Pause className="w-5 h-5 fill-current" /> : <Play className="w-5 h-5 fill-current" />}
+                            <button onClick={togglePlay} aria-label={isPlaying ? 'Pause' : 'Play'} className="hover:text-primary transition-colors">
+                                {isPlaying ? <Pause className="w-5 h-5 fill-current" aria-hidden="true" /> : <Play className="w-5 h-5 fill-current" aria-hidden="true" />}
                             </button>
                             <span className="text-xs font-medium font-mono">
                                 {formatTime(currentTime)} / {formatTime(duration)}
@@ -151,6 +158,8 @@ const VideoPlayer = ({ src, poster, aspectRatio = 'aspect-video', objectFit = 'o
                                         e.stopPropagation();
                                         setShowSpeedMenu(!showSpeedMenu);
                                     }}
+                                    aria-label={`Playback speed ${playbackRate}x`}
+                                    aria-expanded={showSpeedMenu}
                                     className="hover:text-primary transition-colors text-xs font-bold w-8"
                                 >
                                     {playbackRate}x
@@ -170,8 +179,8 @@ const VideoPlayer = ({ src, poster, aspectRatio = 'aspect-video', objectFit = 'o
                                 )}
                             </div>
 
-                            <button onClick={toggleFullscreen} className="hover:text-primary transition-colors">
-                                {isFullscreen ? <Minimize className="w-5 h-5" /> : <Maximize className="w-5 h-5" />}
+                            <button onClick={toggleFullscreen} aria-label={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'} className="hover:text-primary transition-colors">
+                                {isFullscreen ? <Minimize className="w-5 h-5" aria-hidden="true" /> : <Maximize className="w-5 h-5" aria-hidden="true" />}
                             </button>
                         </div>
                     </div>

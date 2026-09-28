@@ -1,51 +1,69 @@
-import React, { useState, useEffect } from 'react';
+import React, { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import { AnimatePresence, MotionConfig } from 'framer-motion';
 import Home from './pages/Home';
-import BasketballProject from './pages/BasketballProject';
-import FormationControlProject from './pages/FormationControlProject';
-import PathPlanningProject from './pages/PathPlanningProject';
-import Playground from './pages/Playground';
 import './index.css';
 
-// Components
 import ThemeToggle from './components/ThemeToggle';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import ParticlesBackground from './components/ParticlesBackground';
-// Navbar is defined inline in AppContent
 import { ThemeProvider } from './context/ThemeContext';
 import { SoundProvider } from './components/SoundProvider';
-import { Toaster } from 'react-hot-toast';
-
-import { AnimatePresence } from 'framer-motion';
 import PageTransition from './components/PageTransition';
 import ScrollProgressBar from './components/ScrollProgressBar';
 import CustomCursor from './components/CustomCursor';
+import ErrorBoundary from './components/ErrorBoundary';
+
+// Only the home page is in the entry bundle. The rest load on first visit; Vite emits
+// one chunk per page. If a chunk from an older deploy is gone, main.jsx reloads once.
+const BasketballProject = lazy(() => import('./pages/BasketballProject'));
+const FormationControlProject = lazy(() => import('./pages/FormationControlProject'));
+const PathPlanningProject = lazy(() => import('./pages/PathPlanningProject'));
+const Playground = lazy(() => import('./pages/Playground'));
+const NotFound = lazy(() => import('./pages/NotFound'));
+
+const Page = ({ children }) => (
+    <PageTransition>
+        <Suspense fallback={<div className="min-h-screen" />}>{children}</Suspense>
+    </PageTransition>
+);
 
 const AppContent = () => {
     const location = useLocation();
     const isHome = location.pathname === '/';
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const mainRef = useRef(null);
 
     const navItems = ['About', 'Projects', 'Timeline', 'Skills', 'Contact'];
 
     useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 50);
-        };
-        window.addEventListener('scroll', handleScroll);
+        const handleScroll = () => setIsScrolled(window.scrollY > 50);
+        window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    // Close the mobile menu on Escape.
+    useEffect(() => {
+        if (!isMobileMenuOpen) return;
+        const onKey = (e) => e.key === 'Escape' && setIsMobileMenuOpen(false);
+        window.addEventListener('keydown', onKey);
+        return () => window.removeEventListener('keydown', onKey);
+    }, [isMobileMenuOpen]);
+
+    // On route change: close the menu and move keyboard focus to the new page content so
+    // screen-reader and keyboard users are not left on the old position.
+    useEffect(() => {
+        setIsMobileMenuOpen(false);
+        mainRef.current?.focus({ preventScroll: true });
+    }, [location.pathname]);
 
     const scrollToSection = (id) => {
         setIsMobileMenuOpen(false);
         if (!isHome) return;
-        const element = document.getElementById(id);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-        }
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     };
 
     return (
@@ -56,12 +74,12 @@ const AppContent = () => {
             {location.pathname !== '/playground' && <ParticlesBackground />}
 
             {/* Navbar */}
-            <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-lg border-b border-white/5' : 'bg-transparent'}`}>
+            <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-lg border-b border-white/5' : 'bg-transparent'}`} aria-label="Main">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-20">
                         {/* Logo */}
-                        <div className="flex-shrink-0 cursor-pointer" onClick={() => window.scrollTo(0, 0)}>
-                            <Link to="/" className="text-2xl font-bold tracking-tighter hover:text-primary transition-colors">
+                        <div className="flex-shrink-0">
+                            <Link to="/" onClick={() => window.scrollTo(0, 0)} className="text-2xl font-bold tracking-tighter hover:text-primary transition-colors">
                                 Alexandru<span className="text-primary">Dabu</span>
                             </Link>
                         </div>
@@ -94,9 +112,12 @@ const AppContent = () => {
                             <ThemeToggle />
                             <button
                                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                                className="text-text hover:text-primary focus:outline-none transition-colors"
+                                className="text-text hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded transition-colors"
+                                aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+                                aria-expanded={isMobileMenuOpen}
+                                aria-controls="mobile-menu"
                             >
-                                {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                                {isMobileMenuOpen ? <X className="w-6 h-6" aria-hidden="true" /> : <Menu className="w-6 h-6" aria-hidden="true" />}
                             </button>
                         </div>
                     </div>
@@ -104,7 +125,7 @@ const AppContent = () => {
 
                 {/* Mobile Menu Dropdown */}
                 {isMobileMenuOpen && (
-                    <div className="md:hidden bg-background/95 backdrop-blur-xl border-b border-text/5 absolute w-full shadow-2xl">
+                    <div id="mobile-menu" className="md:hidden bg-background/95 backdrop-blur-xl border-b border-text/5 absolute w-full shadow-2xl">
                         <div className="px-4 pt-4 pb-6 space-y-2">
                             {isHome ? (
                                 navItems.map((item) => (
@@ -138,31 +159,37 @@ const AppContent = () => {
             </nav>
 
             {/* Main Content */}
-            <main>
-                <AnimatePresence mode="wait">
-                    <Routes location={location} key={location.pathname}>
-                        <Route path="/" element={<PageTransition><Home /></PageTransition>} />
-                        <Route path="/project/basketball" element={<PageTransition><BasketballProject /></PageTransition>} />
-                        <Route path="/project/formation-control" element={<PageTransition><FormationControlProject /></PageTransition>} />
-                        <Route path="/project/path-planning" element={<PageTransition><PathPlanningProject /></PageTransition>} />
-                        <Route path="/playground" element={<PageTransition><Playground /></PageTransition>} />
-                    </Routes>
-                </AnimatePresence>
+            <main ref={mainRef} tabIndex={-1} className="outline-none">
+                <ErrorBoundary>
+                    <AnimatePresence mode="wait">
+                        <Routes location={location} key={location.pathname}>
+                            <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+                            <Route path="/project/basketball" element={<Page><BasketballProject /></Page>} />
+                            <Route path="/project/formation-control" element={<Page><FormationControlProject /></Page>} />
+                            <Route path="/project/path-planning" element={<Page><PathPlanningProject /></Page>} />
+                            <Route path="/playground" element={<Page><Playground /></Page>} />
+                            <Route path="*" element={<Page><NotFound /></Page>} />
+                        </Routes>
+                    </AnimatePresence>
+                </ErrorBoundary>
             </main>
 
             <Footer />
-            <Toaster position="bottom-right" />
         </div>
     );
 };
 
 const App = () => {
     return (
-        <ThemeProvider>
-            <SoundProvider>
-                <AppContent />
-            </SoundProvider>
-        </ThemeProvider>
+        // reducedMotion="user" makes every framer-motion animation respect the OS
+        // "reduce motion" setting. The site is animation-heavy, so this matters.
+        <MotionConfig reducedMotion="user">
+            <ThemeProvider>
+                <SoundProvider>
+                    <AppContent />
+                </SoundProvider>
+            </ThemeProvider>
+        </MotionConfig>
     );
 };
 

@@ -8,10 +8,7 @@ import SEO from '../components/SEO';
 const PathPlanningProject = () => {
     return (
         <div className="min-h-screen bg-background text-text">
-            <SEO
-                title="Path Planning"
-                description="Advanced path planning in hazardous environments using optimization algorithms."
-            />
+            <SEO />
             {/* Project Hero */}
             <section className="relative h-[40vh] pt-24 flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-background/95 z-10" />
@@ -83,7 +80,7 @@ const PathPlanningProject = () => {
                                     Simulation demonstrating the PRM algorithm generating nodes (blue dots), connecting valid paths (black lines), and finding the optimal route (red line) from start (green) to goal (red X).
                                 </p>
                                 <div className="rounded-xl overflow-hidden border border-white/10 shadow-2xl">
-                                    <VideoPlayer src="https://pub-c9add4fb2a554c62867fd1ad02e30165.r2.dev/pathplanning.mp4#t=0.1" />
+                                    <VideoPlayer src="https://media.alexandrudabu.com/pathplanning.mp4#t=0.1" />
                                 </div>
                             </div>
                         </div>

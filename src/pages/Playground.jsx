@@ -13,10 +13,7 @@ const Playground = () => {
     return (
         <div className="min-h-screen bg-background text-text overflow-hidden relative">
             <FloatingCodeBackground />
-            <SEO
-                title="Interactive Playground"
-                description="Interactive tech demos showcasing Flocking Simulation (Boids) and Pathfinding (A*) algorithms."
-            />
+            <SEO />
 
             <section className="relative py-20 px-4 z-10">
                 <div className="max-w-7xl mx-auto mb-12 text-center">
