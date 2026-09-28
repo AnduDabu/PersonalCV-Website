@@ -265,10 +265,25 @@ PerplexityBot get 200, ClaudeBot and GPTBot get 403. That is the intended result
 are training crawlers, and discoverability comes from the search and agent bots, which pass.
 Flip Training to Allow only if the content should feed model training.
 
-Still pending in the dashboard:
+All six variables are now set for Production and Preview.
 
-- Pages > Settings > Variables and Secrets: `EMAILJS_PRIVATE_KEY` is set for **Production
-  only**. Add it for **Preview** too, otherwise the preview Function answers
-  `503 not_configured` and the form cannot be tested before merging. Pages does not expose
-  a secret's value over the API, so it cannot be copied between environments. Secrets are
-  read at request time, so no rebuild is needed.
+**Pages binds environment variables at deployment time**, so adding a secret does not affect
+deployments that already exist. After changing one, retry the deployment (or push) or the
+Function keeps answering `503 not_configured` with the secret sitting right there in the
+dashboard. This cost an hour on 2026-09-28.
+
+Preview tested on 2026-09-28 at `https://audit-fixes.personalcv-website.pages.dev`:
+
+| Case | Result |
+|---|---|
+| Invalid Turnstile token | 403 `captcha_failed` |
+| Honeypot field filled | 200 `{"ok":true}` |
+| Foreign `Origin` header | 403 `forbidden` |
+| GET on `/api/contact` | 405 |
+| Turnstile site key in the bundle | present |
+| Video on `media.alexandrudabu.com` | 200 |
+
+Not yet tested: the EmailJS leg itself, which needs a real Turnstile token from a browser.
+Open the preview URL, send a message through the form, and confirm it arrives. If it returns
+`send_failed`, the cause is the private key or the EmailJS "Allow EmailJS API for non-browser
+applications" setting. Once that passes, merge `audit-fixes` into `main`.
