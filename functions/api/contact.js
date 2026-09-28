@@ -92,7 +92,18 @@ export async function onRequestPost({ request, env }) {
             template_params: { name, email, message },
         }),
     });
-    if (!send.ok) return json({ error: 'send_failed' }, 502);
+    if (!send.ok) {
+        // EmailJS answers with a short plain-text reason, e.g. "API access from non-browser
+        // environments is currently disabled." Swallowing it once cost an afternoon, so log it
+        // and echo it back on preview deployments, where only we can see it.
+        const detail = await send.text().catch(() => '');
+        console.error('EmailJS send failed:', send.status, detail);
+        const isPreview = new URL(request.url).hostname.endsWith('.pages.dev');
+        return json(
+            { error: 'send_failed', ...(isPreview && { status: send.status, detail: detail.slice(0, 300) }) },
+            502,
+        );
+    }
     return json({ ok: true });
 }
 

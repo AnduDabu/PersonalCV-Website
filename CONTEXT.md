@@ -283,7 +283,19 @@ Preview tested on 2026-09-28 at `https://audit-fixes.personalcv-website.pages.de
 | Turnstile site key in the bundle | present |
 | Video on `media.alexandrudabu.com` | 200 |
 
-Not yet tested: the EmailJS leg itself, which needs a real Turnstile token from a browser.
-Open the preview URL, send a message through the form, and confirm it arrives. If it returns
-`send_failed`, the cause is the private key or the EmailJS "Allow EmailJS API for non-browser
-applications" setting. Once that passes, merge `audit-fixes` into `main`.
+The EmailJS leg failed on the first real submission (2026-09-28) with `send_failed`, meaning
+Turnstile passed and EmailJS rejected the call. Probing the EmailJS REST API directly with the
+public key and a bogus template id returned the cause verbatim:
+
+```
+HTTP 403
+API access from non-browser environments is currently disabled.
+Enable this option in https://dashboard.emailjs.com/admin/account/security
+```
+
+So the switch in §9 ("Allow EmailJS API for non-browser applications") really is mandatory;
+the private key itself was never the problem. The Function used to swallow this reason and
+answer a bare `send_failed`. It now logs the upstream status and body, and echoes them back
+on `*.pages.dev` deployments only, so a preview submission names its own cause.
+
+Once a preview submission lands in the inbox, merge `audit-fixes` into `main`.

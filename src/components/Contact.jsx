@@ -38,6 +38,7 @@ const ERROR_TEXT = {
     captcha_missing: 'Please complete the verification first.',
     invalid_email: 'That email address does not look right.',
     invalid_message: 'The message is too short.',
+    send_failed: 'The message could not be sent. Please email me directly.',
 };
 
 const Contact = () => {
@@ -114,7 +115,9 @@ const Contact = () => {
                 formRef.current.reset();
                 showStatus('success');
             } else {
-                showStatus('error', ERROR_TEXT[body.error] || 'Sending failed. Please try again.');
+                const text = ERROR_TEXT[body.error] || 'Sending failed. Please try again.';
+                // `detail` is only ever sent by preview deployments.
+                showStatus('error', body.detail ? `${text} (${body.detail})` : text);
             }
         } catch {
             showStatus('error', 'Network error. Please try again.');
