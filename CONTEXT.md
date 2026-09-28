@@ -259,15 +259,16 @@ Done via the Cloudflare API on 2026-09-17 (verified with curl):
 Also done: secret `TURNSTILE_SECRET` on Production and Preview; the preview build was
 retried and its bundle carries the real site key.
 
-Bot Fight Mode was turned off in the dashboard on 2026-09-28 (verified: `fight_mode: false`).
+Bots, settled 2026-09-28 (Security > Bots > Configure AI bot policies): Bot Fight Mode off,
+Search **Allow**, Agent **Allow**, Training **Disallow**. Verified live: Googlebot and
+PerplexityBot get 200, ClaudeBot and GPTBot get 403. That is the intended result — those two
+are training crawlers, and discoverability comes from the search and agent bots, which pass.
+Flip Training to Allow only if the content should feed model training.
 
 Still pending in the dashboard:
 
-- Security > Bots: set "Block AI bots" to off. ClaudeBot and GPTBot still get 403 on
-  `www.alexandrudabu.com` (verified 2026-09-28). The `bot_management` endpoint refuses
-  OAuth tokens (error 10405) and the block is not in any editable ruleset, so this is
-  dashboard-only.
-- Pages > Settings > Variables and Secrets: secret `EMAILJS_PRIVATE_KEY` (EmailJS >
-  Account > General > Private Key), Production and Preview. It is NOT set — the project
-  has only the five variables visible in the dashboard, and the preview Function still
-  answers `503 not_configured`. Secrets are read at request time, so no rebuild is needed.
+- Pages > Settings > Variables and Secrets: `EMAILJS_PRIVATE_KEY` is set for **Production
+  only**. Add it for **Preview** too, otherwise the preview Function answers
+  `503 not_configured` and the form cannot be tested before merging. Pages does not expose
+  a secret's value over the API, so it cannot be copied between environments. Secrets are
+  read at request time, so no rebuild is needed.
